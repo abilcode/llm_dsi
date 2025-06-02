@@ -8,46 +8,44 @@ from langchain.prompts import (
 from langchain.schema import SystemMessage
 from langchain.chat_models import ChatOpenAI
 from tools.db_tools import db_tools
+from langchain.schema import AIMessage, HumanMessage
 
-
-def create_db_agent():
-    """Create database query agent with schema awareness"""
-    prompt = ChatPromptTemplate(
-        messages=[
+class DBAgentWrapper:
+    def __init__(self):
+        prompt = ChatPromptTemplate.from_messages([
             SystemMessage(content="""Kamu adalah agen spesialis SQL untuk sistem manajemen guest house.
-            
-            Skema basis data:
-            - rooms(room_id, level, height, availability, room_type)
-            - levels(level_id, level_name, description)
-            - room_types(type_id, type_name, base_rate, max_occupancy)
-            
-            Peraturan penting yang harus selalu kamu patuhi:
-            - Selalu jawab dalam bahasa Indonesia, jangan gunakan bahasa Inggris.
-            - Selalu gunakan perbandingan teks dengan operator `LIKE`, jangan gunakan `=`.
-            - Pastikan nilai teks yang digunakan dalam filter dikonversi menjadi huruf kecil (misalnya, 'Standard' menjadi 'standard').
-            - Selalu periksa sintaks SQL sebelum menjalankan kueri.
-            - Jangan pernah mengubah atau menghapus seluruh tabel.
-            - Untuk kueri yang kompleks, pecah menjadi beberapa bagian jika perlu untuk kejelasan dan akurasi.
-            
-            Contoh kueri yang benar:
-            ```sql
-            SELECT * FROM rooms WHERE room_type LIKE 'standard' COLLATE NOCASE;
 
-            """),
+Skema basis data:
+- rooms(room_id, level, height, availability, room_type)
+- levels(level_id, level_name, description)
+- room_types(type_id, type_name, base_rate, max_occupancy)
+
+Peraturan penting yang harus selalu kamu patuhi:
+- Selalu jawab dalam bahasa Indonesia, jangan gunakan bahasa Inggris.
+- Selalu gunakan perbandingan yang sesuai saat menggunakan operator logika.
+- Jika kamu ragu, tanyakan kembali ke pengguna.
+"""),
+            MessagesPlaceholder(variable_name="chat_history"),
             HumanMessagePromptTemplate.from_template("{input}"),
-            MessagesPlaceholder(variable_name="agent_scratchpad")
-        ]
-    )
+            MessagesPlaceholder(variable_name="agent_scratchpad"),
+        ])
 
-    agent = OpenAIFunctionsAgent(
-        llm=ChatOpenAI(model="gpt-3.5-turbo", temperature=0),
-        prompt=prompt,
-        tools=db_tools
-    )
+        llm = ChatOpenAI(model="gpt-4", temperature=0)
+        agent = OpenAIFunctionsAgent(llm=llm, prompt=prompt, tools=db_tools)
+        self.executor = AgentExecutor(agent=agent, tools=db_tools, verbose=True)
+        self.chat_history = []
 
-    return AgentExecutor(
-        agent=agent,
-        tools=db_tools,
-        verbose=True,
-        handle_parsing_errors=True
-    )
+    def ask(self, user_input: str) -> str:
+        try:
+            result = self.executor.invoke({
+                "input": user_input,
+                "chat_history": self.chat_history
+            })
+            self.chat_history.append(HumanMessage(content=user_input))
+            self.chat_history.append(AIMessage(content=result["output"]))
+            return result["output"]
+        except Exception as e:
+            return f"Sorry, something went wrong: {e}"
+
+    def run(self, user_input: str) -> str:
+        return self.ask(user_input)

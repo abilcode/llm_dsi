@@ -2,7 +2,7 @@ from langchain.agents import AgentExecutor, Tool
 from langchain.agents import initialize_agent
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
-from agents.db_agent import create_db_agent
+from agents.db_agent import DBAgentWrapper
 from agents.doc_agent import create_doc_agent
 
 
@@ -12,7 +12,7 @@ class MainAgent:
         self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 
         # Initialize sub-agents
-        self.db_agent = create_db_agent()
+        self.db_agent = DBAgentWrapper()
         self.doc_agent = create_doc_agent()
 
         # Define tools for the main agent
