@@ -3,7 +3,7 @@ from langchain.agents import initialize_agent
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from agents.db_agent import DBAgentWrapper
-from agents.doc_agent import create_doc_agent
+from agents.qa_agent import create_qa_agent
 
 
 class MainAgent:
@@ -13,19 +13,19 @@ class MainAgent:
 
         # Initialize sub-agents
         self.db_agent = DBAgentWrapper()
-        self.doc_agent = create_doc_agent()
+        self.qa_agent = create_qa_agent()
 
         # Define tools for the main agent
         self.tools = [
             Tool(
                 name="DatabaseAgent",
                 func=self.db_agent.run,
-                description="Useful for answering questions about room availability, bookings, and guest house data"
+                description="Berguna untuk menjawab pertanyaan terkait kost-kostan baik dari ketersediaan kamar dan juga keadaan kost-kostan"
             ),
             Tool(
                 name="DocumentAgent",
-                func=self.doc_agent.run,
-                description="Useful for answering questions about guest policies, facilities, and general information"
+                func=self.qa_agent.run,
+                description="Berguna untuk menjawab pertanyaan seputar peraturan kost-kostan, larangan, dan juga hal-hal berbau FAQs"
             )
         ]
 

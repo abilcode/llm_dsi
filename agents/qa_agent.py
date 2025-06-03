@@ -1,3 +1,4 @@
+import json
 from langchain.agents import OpenAIFunctionsAgent, AgentExecutor
 from langchain.prompts import (
     ChatPromptTemplate,
@@ -6,13 +7,22 @@ from langchain.prompts import (
 )
 from langchain.schema import SystemMessage
 from langchain.chat_models import ChatOpenAI
-from tools.doc_tools import setup_document_retriever
+from tools.qa_tools import setup_document_retriever
 
 
-def create_doc_agent():
+def create_qa_agent():
     """Create document retrieval agent"""
     doc_tools = setup_document_retriever()
-
+    # Load your JSON file
+    with open('agents/few_shot/qa_tools_few_shot.json', 'r') as f:
+        qa_data = json.load(f)
+    # Format the question-answer pairs into a string for few-shot learning
+    formatted_examples = ""
+    for item in qa_data:
+        formatted_examples += f"""
+        Q: {item['question']}
+        A: {item['answer']}
+        """
     prompt = ChatPromptTemplate(
         messages=[
             SystemMessage(content=""""
@@ -27,6 +37,9 @@ def create_doc_agent():
             Peraturan penting:
             - Selalu gunakan bahasa Indonesia!
             - Jangan berbohong atau menebak jika tidak yakin jawabannya ada di dokumen.
+            
+            Contoh:
+            {formatted_examples}
             """),
             HumanMessagePromptTemplate.from_template("{input}"),
             MessagesPlaceholder(variable_name="agent_scratchpad")
