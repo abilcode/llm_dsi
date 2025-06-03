@@ -1,9 +1,10 @@
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Query
+from fastapi import FastAPI, HTTPException
 from fastapi.concurrency import asynccontextmanager
 from pydantic import BaseModel
-from typing import List, Optional, Dict, Any
+from typing import List
 from datetime import datetime
 
+from utils.logger import logger
 from database.connection import database
 from sheets.google_sheets import update_room_colors_in_sheet
 
@@ -20,28 +21,9 @@ app = FastAPI(title="Telegram Message Blast API",
 telegram_bot = None
 
 
-class MessageBlastRequest(BaseModel):
-    recipients: List[str]
-    message: str
-    parse_mode: Optional[str] = None
-
-
 class SingleMessageRequest(BaseModel):
-    user_id: int
-
-
-class MessageBlastResponse(BaseModel):
-    blast_id: str
-    status: str
-    total_recipients: int
-    successful: List[str]
-    failed: List[Dict[str, str]]
-    timestamp: datetime
-
-
-class UserListResponse(BaseModel):
-    total_users: int
-    users: List[Dict[str, Any]]
+    telegram_ids: List[int]
+    message: str
 
 
 blast_results = {}
@@ -66,31 +48,33 @@ async def health_check():
     }
 
 
-@app.post("/send-message")
-async def send_single_message(request: SingleMessageRequest):
+@app.post("/send-messages")
+async def send_messages(request: SingleMessageRequest):
     if not telegram_bot:
         raise HTTPException(status_code=503, detail="Bot not initialized")
 
-    try:
-        success = await telegram_bot.send_message_to_user(
-            user_id=request.user_id,
-            message="Waktu tenggat sudah dekat, jangan lupa bayar kosanmu ya!",
-            parse_mode="markdown"
-        )
+    received_users = []
 
-        if success:
-            return {
-                "status": "success",
-                "message": f"Message sent to user {request.user_id}",
-                "timestamp": datetime.now()
-            }
-        else:
-            raise HTTPException(
-                status_code=400,
-                detail=f"Failed to send message to user {request.user_id}"
+    for id in request.telegram_ids:
+        try:
+            success = await telegram_bot.send_message_to_user(
+                user_id=id,
+                message=request.message,
+                parse_mode="markdown"
             )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+
+            if success:
+                received_users.append(id)
+            else:
+                logger.error(f"Failed to sent to user {id}")
+        except Exception as e:
+            logger.error(f"Failed to sent to user {id}")
+
+    return {
+        "status": "success",
+        "message": f"Message sent to users {received_users}",
+        "timestamp": datetime.now()
+    }
 
 
 @app.post("/update-room-availability")
