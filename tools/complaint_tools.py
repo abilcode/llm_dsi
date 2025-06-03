@@ -9,26 +9,6 @@ from datetime import datetime
 conn = sqlite3.connect("guest_rooms.db")
 
 
-def create_complaints_table():
-    """Create complaints table if it doesn't exist"""
-    c = conn.cursor()
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS complaints (
-            complaint_id INTEGER PRIMARY KEY AUTOINCREMENT,
-            guest_name TEXT,
-            room_id TEXT,
-            description TEXT NOT NULL,
-            status TEXT,
-            created_at TIMESTAMP
-        )
-    ''')
-    conn.commit()
-
-
-# Initialize table
-create_complaints_table()
-
-
 def save_complaint(complaint_data: str):
     """Save a new complaint to the database
     Expected format: 'guest_name|room_id|description'
