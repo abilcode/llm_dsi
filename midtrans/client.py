@@ -1,7 +1,7 @@
 from midtrans.config import create_midtrans_client
 
 
-def create_payment_link(booking_id: str, price: int) -> str:
+def create_payment_link(booking_id: int, price: float) -> str:
     snap = create_midtrans_client()
 
     transaction_params = {
