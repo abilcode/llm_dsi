@@ -1,12 +1,13 @@
+import os
+from dotenv import load_dotenv
 import midtransclient
 
-# Initialize the Midtrans client
+load_dotenv()
 
 
 def create_midtrans_client():
-    # Use your Midtrans server key here
-    server_key = 'YOUR_SERVER_KEY'
-    is_sandbox = True  # True for sandbox, False for production
+    server_key = os.getenv("MIDTRANS_SERVER_KEY", "")
+    is_sandbox = True
 
     snap = midtransclient.Snap(
         is_production=not is_sandbox,
