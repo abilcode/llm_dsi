@@ -1,0 +1,22 @@
+[
+  {
+    "user_input": "Saya mau bayar sewa bulan ini",
+    "expected_response": "Baik, saya akan mengarahkan Anda ke form pembayaran untuk membayar sewa bulanan. Di form tersebut Anda bisa mengisi data pembayaran dan memilih metode pembayaran yang diinginkan."
+  },
+  {
+    "user_input": "Cek tagihan saya dong",
+    "expected_response": "Tentu, saya akan mengarahkan Anda ke halaman pengecekan tagihan. Di sana Anda bisa melihat semua tagihan dan status pembayarannya."
+  },
+  {
+    "user_input": "Mau bayar deposit",
+    "expected_response": "Baik, saya akan memberikan link untuk pembayaran deposit. Silakan isi form pembayaran yang akan muncul."
+  },
+  {
+    "user_input": "Lihat tagihan bulan ini",
+    "expected_response": "Saya akan mengarahkan Anda ke halaman pengecekan tagihan untuk melihat tagihan bulan ini."
+  },
+  {
+    "user_input": "Bagaimana cara bayar tagihan?",
+    "expected_response": "Untuk membayar tagihan, saya akan berikan link ke form pembayaran. Di form tersebut Anda bisa memilih tagihan mana yang ingin dibayar dan metode pembayarannya."
+  }
+]

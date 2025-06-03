@@ -5,6 +5,7 @@ from langchain.memory import ConversationBufferMemory
 from agents.db_agent import DBAgentWrapper
 from agents.qa_agent import create_qa_agent
 from agents.complaint_agent import ComplaintAgentWrapper
+from agents.transaction_agent import TransactionAgentWrapper
 
 
 class MainAgent:
@@ -16,6 +17,7 @@ class MainAgent:
         self.db_agent = DBAgentWrapper()
         self.qa_agent = create_qa_agent()
         self.complaint_agent = ComplaintAgentWrapper()
+        self.transaction_agent = TransactionAgentWrapper()
 
         # Define tools for the main agent
         self.tools = [
@@ -33,6 +35,11 @@ class MainAgent:
                 name="ComplaintAgent",
                 func=self.complaint_agent.run,
                 description="Berguna untuk menyelesaikan komplain yang diberikan user terhadap fasilitas, lingkungan, dan service kostan"
+            ),
+            Tool(
+                name="TransactionAgent",
+                func=self.transaction_agent.run,
+                description="Berguna ketika user ingin: bayar sewa, bayar tagihan, bayar deposit, melakukan pembayaran, cek tagihan, lihat tagihan, transfer uang, pembayaran bulanan, atau hal apapun yang berkaitan dengan uang dan pembayaran"
             )
         ]
 
