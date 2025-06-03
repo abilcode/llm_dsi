@@ -11,3 +11,8 @@ pydantic
 typing
 datetime
 python-telegram-bot
+asyncpg
+databases
+gspread
+gspread-formatting
+google-auth

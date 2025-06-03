@@ -61,5 +61,5 @@ class TelegramBot:
             logger.info(f"Callback data: {query.data}")
             if query.data and query.message:
                 await query.message.reply_text("🔄 Mohon Menunggu, Bapak Kos sedang mencari informasi", parse_mode='Markdown') # type: ignore
-                agent_response = self.agent.run(query.data) # type: ignore
+                agent_response = self.agent.run(query.data)  # type: ignore
                 await query.message.reply_text(agent_response, parse_mode='Markdown') # type: ignore
