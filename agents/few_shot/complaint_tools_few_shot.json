@@ -1,0 +1,85 @@
+[
+  {
+    "user_input": "Saya mau lapor, pintu kamar 105 susah ditutup.",
+    "chain_of_thought": [
+      "Pengguna ingin menyampaikan keluhan.",
+      "Nama tamu belum disebutkan.",
+      "Membutuhkan informasi nama tamu untuk melanjutkan."
+    ],
+    "action": null
+  },
+  {
+    "user_input": "Nama saya Budi, kamar 105. Pintu susah ditutup.",
+    "chain_of_thought": [
+      "Pengguna menyebutkan nama, kamar, dan deskripsi masalah.",
+      "Siap untuk menambahkan komplain.",
+      "Semua data tersedia."
+    ],
+    "action": {
+      "tool": "add_complaint",
+      "parameters": {
+        "guest_name": "Budi",
+        "room_id": 105,
+        "description": "Pintu susah ditutup"
+      }
+    }
+  },
+  {
+    "user_input": "Tolong kamar 205 dicek, air panasnya mati.",
+    "chain_of_thought": [
+      "Pengguna menyebutkan masalah dan nomor kamar.",
+      "Nama tamu belum tersedia.",
+      "Meminta informasi tambahan sebelum memproses."
+    ],
+    "action": null
+  },
+  {
+    "user_input": "Saya Dewi dari kamar 205, air panasnya mati.",
+    "chain_of_thought": [
+      "Pengguna menyebutkan nama, kamar, dan masalah.",
+      "Siap untuk memanggil fungsi `add_complaint`."
+    ],
+    "action": {
+      "tool": "add_complaint",
+      "parameters": {
+        "guest_name": "Dewi",
+        "room_id": 205,
+        "description": "Air panasnya mati"
+      }
+    }
+  },
+  {
+    "user_input": "Saya ingin lihat semua komplain yang pernah masuk.",
+    "chain_of_thought": [
+      "Permintaan pengguna adalah melihat daftar komplain.",
+      "Tidak membutuhkan parameter tambahan."
+    ],
+    "action": {
+      "tool": "list_complaints",
+      "parameters": {}
+    }
+  },
+  {
+    "user_input": "Tolong tandai komplain nomor 3 sudah ditangani.",
+    "chain_of_thought": [
+      "Permintaan untuk memperbarui status komplain.",
+      "Status default kemungkinan 'closed' atau 'in progress'.",
+      "Perlu klarifikasi status jika belum disebutkan."
+    ],
+    "action": null
+  },
+  {
+    "user_input": "Update komplain ID 3 menjadi closed.",
+    "chain_of_thought": [
+      "Permintaan jelas: memperbarui status.",
+      "Semua parameter tersedia."
+    ],
+    "action": {
+      "tool": "update_complaint_status",
+      "parameters": {
+        "complaint_id": 3,
+        "status": "closed"
+      }
+    }
+  }
+]

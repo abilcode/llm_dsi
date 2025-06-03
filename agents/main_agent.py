@@ -4,6 +4,7 @@ from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from agents.db_agent import DBAgentWrapper
 from agents.qa_agent import create_qa_agent
+from agents.complaint_agent import ComplaintAgentWrapper
 
 
 class MainAgent:
@@ -14,6 +15,7 @@ class MainAgent:
         # Initialize sub-agents
         self.db_agent = DBAgentWrapper()
         self.qa_agent = create_qa_agent()
+        self.complaint_agent = ComplaintAgentWrapper()
 
         # Define tools for the main agent
         self.tools = [
@@ -26,6 +28,11 @@ class MainAgent:
                 name="DocumentAgent",
                 func=self.qa_agent.run,
                 description="Berguna untuk menjawab pertanyaan seputar peraturan kost-kostan, larangan, dan juga hal-hal berbau FAQs"
+            ),
+            Tool(
+                name="ComplaintAgent",
+                func=self.complaint_agent.run,
+                description="Berguna untuk menyelesaikan komplain yang diberikan user terhadap fasilitas, lingkungan, dan service kostan"
             )
         ]
 
