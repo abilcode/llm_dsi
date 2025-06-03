@@ -1,5 +1,4 @@
-from langchain.agents import AgentExecutor, Tool
-from langchain.agents import initialize_agent
+from langchain.agents import Tool, initialize_agent, AgentType
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from agents.db_agent import DBAgentWrapper
@@ -11,7 +10,8 @@ from agents.transaction_agent import TransactionAgentWrapper
 class MainAgent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-        self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        self.memory = ConversationBufferMemory(
+            memory_key="chat_history", return_messages=True)
 
         # Initialize sub-agents
         self.db_agent = DBAgentWrapper()
@@ -47,11 +47,11 @@ class MainAgent:
         self.agent = initialize_agent(
             tools=self.tools,
             llm=self.llm,
-            agent="chat-conversational-react-description",
+            agent=AgentType.CHAT_CONVERSATIONAL_REACT_DESCRIPTION,
             verbose=True,
             memory=self.memory,
             max_iterations=3
         )
 
-    def run(self, query):
+    def run(self, query, user_id):
         return self.agent.run(input=query)

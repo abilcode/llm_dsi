@@ -4,7 +4,7 @@ from langchain.chains import RetrievalQA
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import Tool
 from langchain.schema import Document
-from typing import List, Optional
+from typing import List
 import logging
 
 # Setup logging
@@ -65,7 +65,8 @@ class DocumentQATool:
             logger.info("Document Q&A components initialized successfully")
 
         except Exception as e:
-            logger.error(f"Error initializing Document Q&A components: {str(e)}")
+            logger.error(
+                f"Error initializing Document Q&A components: {str(e)}")
             raise
 
     def search_documents(self, query: str) -> str:
@@ -86,6 +87,9 @@ class DocumentQATool:
             cleaned_query = query.strip()
 
             # Run QA chain
+            if (not self.qa_chain):
+                return "Maaf, terjadi kendala teknis saat mencari informasi. Silakan coba lagi atau hubungi administrator."
+
             result = self.qa_chain({"query": cleaned_query})
 
             # Extract answer and sources
@@ -94,7 +98,8 @@ class DocumentQATool:
 
             # Format response professionally
             if answer and not self._is_no_answer(answer):
-                formatted_response = self._format_professional_response(answer, source_docs)
+                formatted_response = self._format_professional_response(
+                    answer, source_docs)
                 return formatted_response
             else:
                 return self._format_no_answer_response(cleaned_query)
@@ -242,9 +247,10 @@ def test_qa_tool():
 
         for query in test_queries:
             print(f"\nQ: {query}")
-            response = doc_tool.func(query)
-            print(f"A: {response}")
-            print("-" * 30)
+            if (doc_tool.func):
+                response = doc_tool.func(query)
+                print(f"A: {response}")
+                print("-" * 30)
 
     except Exception as e:
         print(f"Test failed: {str(e)}")

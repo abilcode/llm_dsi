@@ -42,15 +42,15 @@ class QAAgentWrapper:
             formatted_examples = ""
             for i, item in enumerate(qa_data[:8], 1):  # Use first 8 examples
                 formatted_examples += f"""
-Contoh {i}:
-Pengguna: {item['question']}
-Asisten: {item['answer']}
-"""
-
+                    Contoh {i}:
+                    Pengguna: {item['question']}
+                    Asisten: {item['answer']}
+                """
             return formatted_examples
 
         except FileNotFoundError:
-            logger.warning("Few-shot examples file not found, using default examples")
+            logger.warning(
+                "Few-shot examples file not found, using default examples")
             return self._get_default_examples()
         except Exception as e:
             logger.error(f"Error loading few-shot examples: {str(e)}")
@@ -101,6 +101,7 @@ GAYA KOMUNIKASI:
 - Gunakan "Berdasarkan peraturan guest house..." untuk memberikan kredibilitas
 - Berikan jawaban yang lengkap namun tidak berlebihan
 - Akhiri dengan penawaran bantuan lebih lanjut jika sesuai
+- Gunakan format Markdown untuk memastikan pesan yang diterima oleh pelanggan dapat dilihat dengan mudah
 
 LARANGAN:
 ✗ JANGAN menjawab dengan pengetahuan umum tanpa menggunakan tool
@@ -186,6 +187,9 @@ Ingat: Tujuan Anda adalah memberikan pelayanan informasi terbaik untuk membantu 
             logger.info(f"Processing query: {cleaned_input[:100]}...")
 
             # Process with agent
+            if (not self.executor):
+                return "Maaf, terjadi gangguan pada sistem"
+
             result = self.executor.invoke({
                 "input": cleaned_input,
                 "chat_history": self.chat_history
