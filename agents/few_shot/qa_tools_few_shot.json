@@ -1,70 +1,102 @@
 [
   {
-    "question": "Sampai jam berapa jam malam berlaku di kost ini?",
-    "answer": "Jam malam berlaku sampai dengan pukul 23.00 WIB. Setelah itu, pintu gerbang kost akan dikunci dan tidak bisa keluar-masuk tanpa izin khusus."
+    "question": "Halo, selamat pagi. Bisa tolong bantu saya?",
+    "answer": "Selamat pagi! Tentu saja, saya dengan senang hati akan membantu Anda. Saya adalah asisten virtual untuk guest house ini yang siap memberikan informasi mengenai peraturan, kebijakan, dan tata tertib yang berlaku. Silakan ajukan pertanyaan apa pun terkait guest house, dan saya akan memberikan informasi yang akurat berdasarkan dokumen resmi."
   },
   {
-    "question": "Bolehkah saya memakai sandal di dalam kost?",
-    "answer": "Penghuni diminta melepas sepatu atau sandal dari luar. Jika diperlukan, penghuni dapat memakai alas kaki pribadi yang khusus digunakan di dalam ruangan."
+    "question": "Sampai jam berapa jam malam berlaku di guest house ini?",
+    "answer": "Berdasarkan peraturan guest house, jam malam berlaku sampai dengan pukul 23.00 WIB. Setelah jam tersebut, pintu gerbang guest house akan dikunci secara otomatis dan penghuni tidak dapat keluar-masuk tanpa izin khusus dari pengelola. Kebijakan ini diterapkan untuk menjaga keamanan dan kenyamanan bersama seluruh penghuni."
   },
   {
-    "question": "Apakah saya boleh membawa teman laki-laki ke kamar?",
-    "answer": "Tidak diperbolehkan. Tamu laki-laki hanya boleh menunggu di area lobby dan tidak diizinkan masuk ke area kamar."
+    "question": "Bolehkah saya memakai sandal di dalam guest house?",
+    "answer": "Berdasarkan peraturan guest house, penghuni diminta untuk melepas sepatu atau sandal dari luar sebelum memasuki area dalam. Namun, jika diperlukan, Anda diperbolehkan memakai alas kaki pribadi yang khusus digunakan untuk dalam ruangan. Aturan ini diterapkan untuk menjaga kebersihan dan kenyamanan lingkungan guest house."
   },
   {
-    "question": "Bagaimana jika properti kost rusak karena kelalaian saya?",
-    "answer": "Jika terjadi kerusakan atau kehilangan pada properti kost yang disebabkan oleh penghuni, maka penghuni akan dikenakan denda sesuai kebijakan pengelola kost."
+    "question": "Apakah saya boleh membawa teman laki-laki ke kamar saya?",
+    "answer": "Berdasarkan peraturan guest house, tamu laki-laki tidak diperbolehkan masuk ke area kamar. Tamu laki-laki hanya diizinkan menunggu di area lobby yang telah disediakan. Selain itu, semua tamu wajib melapor kepada pengelola atau pengurus guest house sebelum berkunjung. Kebijakan ini diterapkan untuk menjaga privasi dan kenyamanan seluruh penghuni."
   },
   {
-    "question": "Apakah boleh ada dua orang tinggal dalam satu kamar?",
-    "answer": "Tidak boleh. Setiap kamar hanya boleh dihuni oleh maksimal satu orang."
+    "question": "Bagaimana jika ada fasilitas guest house yang rusak karena kelalaian saya?",
+    "answer": "Berdasarkan peraturan guest house, jika terjadi kerusakan atau kehilangan pada properti guest house yang disebabkan oleh kelalaian penghuni, maka penghuni yang bersangkutan akan dikenakan denda sesuai dengan kebijakan pengelola. Besaran denda akan disesuaikan dengan tingkat kerusakan dan biaya perbaikan yang diperlukan. Oleh karena itu, kami mengimbau semua penghuni untuk selalu berhati-hati dalam menggunakan fasilitas."
   },
   {
-    "question": "Apakah saya boleh membawa hewan peliharaan ke kost?",
-    "answer": "Tidak diperkenankan. Penghuni tidak boleh membawa binatang piaraan ke dalam kost."
+    "question": "Berapa orang maksimal yang boleh tinggal dalam satu kamar?",
+    "answer": "Berdasarkan peraturan guest house, setiap kamar hanya boleh dihuni oleh maksimal 1 (satu) orang saja. Kebijakan ini diterapkan untuk memastikan kenyamanan, privasi, dan keamanan setiap penghuni, serta untuk menjaga kapasitas guest house tetap sesuai dengan standar yang telah ditetapkan."
   },
   {
-    "question": "Bolehkan keluarga saya menginap?",
-    "answer": "Keluarga perempuan diperbolehkan menginap sesekali bila memang diperlukan. Namun tetap harus memberi tahu pihak pengelola terlebih dahulu."
+    "question": "Apakah saya boleh membawa hewan peliharaan ke guest house?",
+    "answer": "Berdasarkan peraturan guest house, penghuni tidak diperkenankan membawa binatang piaraan atau hewan peliharaan ke dalam area guest house. Kebijakan ini diterapkan untuk menjaga kebersihan, kesehatan, dan kenyamanan bersama, serta menghindari potensi alergi atau ketidaknyamanan penghuni lainnya."
   },
   {
-    "question": "Apa aturan terkait merokok di area kost?",
-    "answer": "Merokok, termasuk rokok elektrik atau vape, dilarang di seluruh area kost. Kost ini adalah area bebas asap rokok."
+    "question": "Bolehkah keluarga saya menginap di guest house?",
+    "answer": "Berdasarkan peraturan guest house, keluarga perempuan diperbolehkan menginap sesekali apabila memang diperlukan. Namun, Anda tetap wajib memberitahu dan meminta izin kepada pihak pengelola terlebih dahulu sebelum keluarga menginap. Hal ini penting untuk koordinasi dan memastikan kenyamanan bersama."
   },
   {
-    "question": "Bagaimana cara membuang pembalut yang benar di kost ini?",
-    "answer": "Pembalut harus dibungkus terlebih dahulu sebelum dibuang ke tempat sampah. Dilarang membuang pembalut ke dalam kloset karena bisa menyebabkan saluran tersumbat."
+    "question": "Apa aturan terkait merokok di area guest house?",
+    "answer": "Berdasarkan peraturan guest house, merokok dilarang keras di seluruh area guest house, termasuk penggunaan rokok elektrik atau vape. Guest house ini menerapkan kebijakan bebas asap rokok secara menyeluruh untuk menjaga kesehatan dan kenyamanan semua penghuni. Pelanggaran terhadap aturan ini dapat dikenakan sanksi sesuai kebijakan pengelola."
   },
   {
-    "question": "Apakah boleh membuang sisa makanan ke wastafel (sink)?",
-    "answer": "Tidak boleh. Sisa makanan dan minyak dilarang dibuang ke dalam sink karena bisa menyebabkan saluran air tersumbat."
+    "question": "Bagaimana cara membuang pembalut yang benar di guest house ini?",
+    "answer": "Berdasarkan peraturan guest house, pembalut harus dibungkus terlebih dahulu dengan rapi sebelum dibuang ke tempat sampah yang tersedia. Sangat dilarang membuang pembalut ke dalam kloset karena dapat menyebabkan penyumbatan pada saluran pembuangan. Kebersihan dan kelancaran sistem sanitasi adalah tanggung jawab bersama seluruh penghuni."
+  },
+  {
+    "question": "Apakah boleh membuang sisa makanan ke wastafel?",
+    "answer": "Berdasarkan peraturan guest house, sisa makanan dan minyak dilarang keras dibuang ke dalam sink atau wastafel karena dapat menyebabkan tersumbatnya saluran air. Sisa makanan harus dibuang ke tempat sampah yang telah disediakan. Aturan ini penting untuk menjaga kelancaran sistem pembuangan dan mencegah kerusakan instalasi."
   },
   {
     "question": "Siapa yang bertanggung jawab atas kebersihan kamar?",
-    "answer": "Setiap penghuni bertanggung jawab atas kebersihan kamar dan area bersama. Penghuni harus membuang sampah pada tempatnya dan tidak melakukan vandalisme."
+    "answer": "Berdasarkan peraturan guest house, setiap penghuni bertanggung jawab penuh atas kebersihan kamar masing-masing dan area bersama. Penghuni wajib membuang sampah pada tempatnya, menjaga kebersihan lingkungan, dan tidak melakukan vandalisme seperti coret-mencoret. Kebersihan adalah tanggung jawab bersama untuk menciptakan lingkungan yang nyaman bagi semua."
   },
   {
     "question": "Apa yang harus dilakukan setelah menggunakan dapur bersama?",
-    "answer": "Setelah menggunakan kompor, alat masak, dan peralatan makan, penghuni harus langsung membersihkannya. Tidak diperbolehkan meninggalkan peralatan dalam keadaan kotor."
+    "answer": "Berdasarkan peraturan guest house, setelah menggunakan dapur bersama, penghuni wajib langsung membersihkan kompor, alat masak, dan peralatan makan yang telah digunakan. Tidak diperbolehkan meninggalkan peralatan dalam keadaan kotor. Hal ini penting untuk menjaga kebersihan dapur dan memastikan fasilitas selalu siap digunakan oleh penghuni lainnya."
   },
   {
     "question": "Bolehkah membuang tisu ke dalam toilet?",
-    "answer": "Tidak boleh. Tisu dan pembalut dilarang dibuang ke dalam kloset karena bisa menyebabkan penyumbatan."
+    "answer": "Berdasarkan peraturan guest house, tisu dan pembalut dilarang keras dibuang ke dalam kloset atau toilet karena dapat menyebabkan penyumbatan pada sistem pembuangan. Tisu bekas harus dibuang ke tempat sampah yang tersedia. Aturan ini sangat penting untuk menjaga kelancaran sistem sanitasi guest house."
   },
   {
-    "question": "Apa yang harus saya lakukan jika terjadi kebocoran air?",
-    "answer": "Segera laporkan kepada pengelola kost jika terjadi kebocoran, dan pastikan mematikan kran setelah digunakan."
+    "question": "Apa yang harus saya lakukan jika terjadi kebocoran air di kamar?",
+    "answer": "Berdasarkan peraturan guest house, jika terjadi kebocoran air, Anda harus segera melaporkan kepada pengelola guest house untuk penanganan lebih lanjut. Selain itu, pastikan selalu mematikan kran setelah digunakan untuk mencegah pemborosan air dan potensi kebocoran. Pelaporan yang cepat akan membantu mencegah kerusakan yang lebih besar."
   },
   {
-    "question": "Apakah saya perlu melapor jika menerima tamu?",
-    "answer": "Ya. Semua tamu wajib melapor kepada pengelola atau pengurus kost sebelum berkunjung."
+    "question": "Apakah saya perlu melapor jika ada tamu yang berkunjung?",
+    "answer": "Berdasarkan peraturan guest house, semua tamu wajib melapor kepada pengelola atau pengurus guest house sebelum berkunjung. Hal ini penting untuk keamanan, monitoring, dan koordinasi pengelolaan guest house. Pastikan tamu Anda mengikuti prosedur pelaporan yang berlaku."
   },
   {
-    "question": "Apakah saya harus pakai pembalut tertentu di kost ini?",
-    "answer": "Penghuni disarankan menggunakan pembalut yang aman dari kebocoran untuk menjaga kebersihan matras, terutama jika sedang tidak bisa menggunakan alat pengaman lainnya."
+    "question": "Adakah rekomendasi pembalut tertentu yang harus digunakan di guest house?",
+    "answer": "Berdasarkan peraturan guest house, untuk menjaga kebersihan matras, penghuni disarankan menggunakan pembalut yang aman dari kebocoran, terutama bila sedang tidak dapat menggunakan alat pengaman lainnya. Pemilihan pembalut yang berkualitas baik akan membantu menjaga kebersihan fasilitas dan kenyamanan Anda sendiri."
   },
   {
     "question": "Apa sanksinya jika saya melanggar aturan kebersihan?",
-    "answer": "Jika melanggar aturan kebersihan, misalnya membuang sampah sembarangan atau meninggalkan dapur dalam keadaan kotor, penghuni dapat ditegur dan dikenai sanksi sesuai peraturan kost."
+    "answer": "Berdasarkan peraturan guest house, jika penghuni melanggar aturan kebersihan seperti membuang sampah sembarangan atau meninggalkan dapur dalam keadaan kotor, penghuni dapat ditegur dan dikenai sanksi sesuai dengan peraturan yang berlaku. Tingkat sanksi akan disesuaikan dengan jenis dan tingkat pelanggaran yang dilakukan."
+  },
+  {
+    "question": "Bagaimana aturan untuk menjaga ketenangan di guest house?",
+    "answer": "Berdasarkan peraturan guest house, semua penghuni wajib menjaga ketenangan untuk kenyamanan bersama. Hal ini mencakup tidak membuat keributan, berbicara dengan volume yang wajar, dan menghormati waktu istirahat penghuni lainnya. Aturan ini penting untuk menciptakan lingkungan yang kondusif bagi semua penghuni."
+  },
+  {
+    "question": "Apakah ada aturan khusus mengenai penggunaan obat-obatan?",
+    "answer": "Berdasarkan peraturan guest house, penghuni dilarang keras mengkonsumsi obat-obatan terlarang atau narkotika di area guest house. Pelanggaran terhadap aturan ini dapat berakibat pada sanksi tegas termasuk pemecatan dari guest house. Aturan ini diterapkan untuk menjaga keamanan dan menciptakan lingkungan yang sehat bagi semua penghuni."
+  },
+  {
+    "question": "Bisakah Anda memberikan ringkasan semua peraturan utama guest house?",
+    "answer": "Tentu! Berikut ringkasan peraturan utama guest house: 1) Jam malam hingga 23.00 WIB, 2) Lepas alas kaki luar, gunakan alas kaki dalam ruangan, 3) Maksimal 1 orang per kamar, 4) Tamu laki-laki hanya di lobby dan wajib lapor, 5) Dilarang merokok dan narkoba, 6) Tidak boleh bawa hewan peliharaan, 7) Jaga kebersihan kamar dan area bersama, 8) Bersihkan peralatan dapur setelah pakai, 9) Buang sampah pada tempatnya, jangan buang tisu/pembalut ke toilet, 10) Laporkan kerusakan segera. Semua aturan ini untuk kenyamanan bersama."
+  },
+  {
+    "question": "Apakah ada denda untuk setiap pelanggaran?",
+    "answer": "Berdasarkan peraturan guest house, sistem denda diterapkan untuk kerusakan atau kehilangan properti yang disebabkan oleh penghuni. Untuk pelanggaran aturan lainnya seperti kebersihan atau kedisiplinan, pengelola akan memberikan teguran dan sanksi sesuai tingkat pelanggaran. Besaran denda akan disesuaikan dengan jenis pelanggaran dan kerugian yang ditimbulkan."
+  },
+  {
+    "question": "Bagaimana jika saya butuh bantuan darurat di malam hari setelah jam 23.00?",
+    "answer": "Maaf, saya tidak menemukan informasi spesifik mengenai prosedur bantuan darurat setelah jam malam dalam dokumen peraturan yang tersedia. Untuk situasi darurat atau kebutuhan mendesak setelah jam 23.00, saya sarankan Anda menghubungi pengelola guest house secara langsung melalui nomor kontak yang telah disediakan atau melalui sistem komunikasi darurat yang tersedia."
+  },
+  {
+    "question": "Berapa lama masa kontrak minimum untuk menginap di guest house?",
+    "answer": "Maaf, saya tidak menemukan informasi mengenai masa kontrak minimum atau durasi menginap dalam dokumen peraturan yang tersedia. Untuk informasi terkait kontrak, biaya, dan durasi menginap, silakan hubungi bagian administrasi atau pengelola guest house secara langsung untuk mendapatkan penjelasan yang lebih detail."
+  },
+  {
+    "question": "Apakah ada fasilitas laundry di guest house?",
+    "answer": "Maaf, saya tidak menemukan informasi mengenai fasilitas laundry dalam dokumen peraturan yang tersedia. Untuk mengetahui fasilitas-fasilitas yang tersedia di guest house termasuk layanan laundry, silakan tanyakan langsung kepada pengelola guest house atau periksa informasi fasilitas yang disediakan di area umum."
   }
 ]

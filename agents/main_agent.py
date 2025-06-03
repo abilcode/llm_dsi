@@ -3,7 +3,7 @@ from langchain.agents import initialize_agent
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from agents.db_agent import DBAgentWrapper
-from agents.qa_agent import create_qa_agent
+from agents.qa_agent import QAAgentWrapper
 from agents.complaint_agent import ComplaintAgentWrapper
 from agents.transaction_agent import TransactionAgentWrapper
 
@@ -15,7 +15,7 @@ class MainAgent:
 
         # Initialize sub-agents
         self.db_agent = DBAgentWrapper()
-        self.qa_agent = create_qa_agent()
+        self.qa_agent = QAAgentWrapper()
         self.complaint_agent = ComplaintAgentWrapper()
         self.transaction_agent = TransactionAgentWrapper()
 
