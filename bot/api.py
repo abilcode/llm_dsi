@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import List
 from datetime import datetime
 
+from midtrans.client import create_payment_link
 from utils.logger import logger
 from database.connection import database
 from sheets.google_sheets import update_room_colors_in_sheet
@@ -24,6 +25,11 @@ telegram_bot = None
 class SingleMessageRequest(BaseModel):
     telegram_ids: List[int]
     message: str
+
+
+class GeneratePaymentLinkRequest(BaseModel):
+    booking_id: int
+    price: float
 
 
 blast_results = {}
@@ -87,3 +93,18 @@ async def update_room_availability():
         return {"status": "success", "updated_rooms": len(room_data)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post('/generate-payment-link')
+async def generate_payment_link(request: GeneratePaymentLinkRequest):
+    try:
+        payment_link = create_payment_link(request.booking_id, request.price)
+
+        return {"status": "success", "payment_link": payment_link}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/payment-callback")
+async def payment_callback():
+    return
