@@ -6,3 +6,8 @@ chromadb
 pyboxen
 pandas
 pyfiglet
+fastapi
+pydantic
+typing
+datetime
+python-telegram-bot
