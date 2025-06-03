@@ -1,0 +1,23 @@
+
+[
+  {
+    "user_input": "Saya mau mengajukan keluhan. AC di kamar saya tidak dingin",
+    "expected_response": "Baik, saya akan membantu Anda mengajukan keluhan tentang AC yang tidak dingin. Untuk melengkapi data keluhan, bisa tolong berikan informasi berikut:\n1. Nama lengkap Anda\n2. Nomor kamar\n3. Deskripsi lebih detail tentang masalah AC (sudah berapa lama, apakah sama sekali tidak dingin atau kurang dingin, dll)"
+  },
+  {
+    "user_input": "Nama saya Sari, kamar 201. AC-nya sama sekali tidak keluar angin dingin sejak kemarin",
+    "expected_response": "Terima kasih informasinya, Bu Sari. Saya akan mencatat keluhan Anda:\n- Nama: Sari\n- Kamar: 201\n- Jenis Keluhan: Fasilitas\n- Deskripsi: AC sama sekali tidak keluar angin dingin sejak kemarin\n\nKeluhan berhasil disimpan dengan ID: [complaint_id]. Tim pengelola akan segera menangani keluhan Anda."
+  },
+  {
+    "user_input": "Bagaimana status keluhan saya yang kemarin?",
+    "expected_response": "Untuk melihat status keluhan Anda, bisa tolong berikan nama lengkap atau ID keluhan yang ingin dicek statusnya?"
+  },
+  {
+    "user_input": "Cek status keluhan atas nama Sari",
+    "expected_response": "Berikut adalah keluhan-keluhan atas nama Sari:\n[list of complaints with status]"
+  },
+  {
+    "user_input": "Kamar mandi kotor dan bau",
+    "expected_response": "Saya mengerti keluhan Anda tentang kondisi kamar mandi. Untuk mencatat keluhan ini, bisa tolong berikan:\n1. Nama lengkap Anda\n2. Nomor kamar\n3. Detail lebih spesifik tentang kondisi kamar mandi (bagian mana yang kotor, sudah berapa lama, dll)"
+  }
+]

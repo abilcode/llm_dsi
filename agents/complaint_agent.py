@@ -1,47 +1,73 @@
+# agents/complaint_agent.py
 import json
 from langchain.agents import OpenAIFunctionsAgent, AgentExecutor
-from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate, MessagesPlaceholder
-from langchain.schema import SystemMessage, AIMessage, HumanMessage
+from langchain.prompts import (
+    ChatPromptTemplate,
+    HumanMessagePromptTemplate,
+    MessagesPlaceholder
+)
+from langchain.schema import SystemMessage
 from langchain.chat_models import ChatOpenAI
 from tools.complaint_tools import complaint_tools
+from langchain.schema import AIMessage, HumanMessage
 
 
 class ComplaintAgentWrapper:
-    def __init__(self, ):
-        self.chat_history = []
+    def __init__(self):
+        # Load few-shot examples
+        try:
+            with open('agents/few_shot/complaint_few_shot.json', 'r') as f:
+                complaint_examples = json.load(f)
+            formatted_examples = ""
+            for item in complaint_examples:
+                formatted_examples += f"""
+                Pengguna: {item['user_input']}
+                Agen: {item['expected_response']}
+                """
+        except FileNotFoundError:
+            formatted_examples = ""
 
-        # ==== Load Few-shot Examples from JSON ====
-        with open('agents/few_shot/complaint_tools_few_shot.json', 'r') as f:
-            complaint_data = json.load(f)
-
-        fewshot_messages = []
-        for ex in complaint_data:
-            fewshot_messages.append(HumanMessage(content=ex["user_input"]))
-            reasoning = "\n".join(f"- {step}" for step in ex["chain_of_thought"])
-            if ex["action"]:
-                tool = ex["action"]["tool"]
-                params = ex["action"]["parameters"]
-                action = f"Memanggil fungsi `{tool}` dengan parameter: {params}"
-            else:
-                action = "Tidak bisa mengambil tindakan karena informasi belum lengkap."
-            fewshot_messages.append(AIMessage(content=f"Langkah berpikir:\n{reasoning}\n\nTindakan:\n{action}"))
-
-        # ==== Prompt Template ====
         prompt = ChatPromptTemplate.from_messages([
-            SystemMessage(content="""Kamu adalah agen layanan pelanggan untuk guest house. 
-Tugasmu adalah mencatat, menampilkan, dan memperbarui status komplain dari tamu.
+            SystemMessage(content=f"""Kamu adalah agen spesialis keluhan untuk sistem manajemen guest house.
 
-Selalu jawab dalam bahasa Indonesia. Jika data yang dibutuhkan tidak lengkap, tanyakan kembali ke pengguna."""),
-            *fewshot_messages,
+Skema basis data untuk keluhan:
+- complaints(complaint_id, guest_name, room_id, description, status, created_at)
+
+Tugas utama kamu:
+- Membantu tamu menyimpan keluhan mereka ke database
+- Meminta informasi yang diperlukan jika ada yang kurang (nama tamu, room_id, deskripsi keluhan)
+- Memberikan konfirmasi setelah keluhan berhasil disimpan
+- Melihat status keluhan yang sudah ada
+
+PENTING - Format untuk menyimpan keluhan:
+- Gunakan tool save_complaint dengan format: "guest_name|room_id|description"
+- Contoh: "Nabil|2|Genteng bocor"
+- Untuk update status: gunakan format "complaint_id|status"
+
+Peraturan penting yang harus selalu kamu patuhi:
+- Selalu jawab dalam bahasa Indonesia, jangan gunakan bahasa Inggris.
+- Bersikap ramah dan memahami keluhan tamu.
+- Pastikan semua informasi yang diperlukan lengkap sebelum menyimpan ke database.
+- Jika informasi kurang, tanyakan dengan sopan kepada tamu.
+- Saat menyimpan keluhan, gabungkan semua informasi dengan format yang benar menggunakan separator "|"
+
+Informasi yang diperlukan untuk keluhan:
+1. Nama tamu (guest_name)
+2. ID/nomor kamar (room_id) 
+3. Deskripsi keluhan (description)
+
+Contoh percakapan:
+{formatted_examples}
+"""),
             MessagesPlaceholder(variable_name="chat_history"),
             HumanMessagePromptTemplate.from_template("{input}"),
             MessagesPlaceholder(variable_name="agent_scratchpad"),
         ])
 
-        # ==== Agent Setup ====
         llm = ChatOpenAI(model="gpt-4", temperature=0)
         agent = OpenAIFunctionsAgent(llm=llm, prompt=prompt, tools=complaint_tools)
         self.executor = AgentExecutor(agent=agent, tools=complaint_tools, verbose=True)
+        self.chat_history = []
 
     def ask(self, user_input: str) -> str:
         try:
