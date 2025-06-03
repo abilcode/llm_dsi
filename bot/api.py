@@ -87,3 +87,8 @@ async def update_room_availability():
         return {"status": "success", "updated_rooms": len(room_data)}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/payment-callback")
+async def payment_callback():
+    return
