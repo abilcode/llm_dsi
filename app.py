@@ -11,6 +11,7 @@ load_dotenv()
 
 
 async def start_uvicorn():
+
     config = uvicorn.Config(
         api_app,
         host=os.getenv("API_HOST", "0.0.0.0"),
