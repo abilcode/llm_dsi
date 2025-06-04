@@ -5,7 +5,7 @@ from agents.db_agent import DBAgentWrapper
 from agents.qa_agent import QAAgentWrapper
 from agents.complaint_agent import ComplaintAgentWrapper
 from agents.transaction_agent import TransactionAgentWrapper
-
+from utils.zeroshot_formatter import ZeroShotTextFormatter
 
 class MainAgent:
     def __init__(self):
@@ -18,6 +18,7 @@ class MainAgent:
         self.qa_agent = QAAgentWrapper()
         self.complaint_agent = ComplaintAgentWrapper()
         self.transaction_agent = TransactionAgentWrapper()
+        self.formatter = ZeroShotTextFormatter(use_llm=True)
 
         # Define tools for the main agent
         self.tools = [
@@ -54,4 +55,10 @@ class MainAgent:
         )
 
     def run(self, query, user_id):
-        return self.agent.run(input=query)
+
+        raw_result = self.agent.run(input=query)
+
+        # Format response sebelum return
+        formatted_result = self.formatter.format_text(raw_result)
+
+        return formatted_result
