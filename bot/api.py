@@ -1,7 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.concurrency import asynccontextmanager
 from pydantic import BaseModel
-from typing import List
+from typing import Dict, List, Optional
 from datetime import datetime
 
 from midtrans.client import create_payment_link
@@ -10,14 +10,14 @@ from database.connection import database
 from sheets.google_sheets import update_room_colors_in_sheet
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    await database.connect()
-    yield
-    await database.disconnect()
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     await database.connect()
+#     yield
+#     await database.disconnect()
 
 app = FastAPI(title="Telegram Message Blast API",
-              version="1.0.0", lifespan=lifespan)
+              version="1.0.0")
 
 telegram_bot = None
 
@@ -30,6 +30,11 @@ class SingleMessageRequest(BaseModel):
 class GeneratePaymentLinkRequest(BaseModel):
     booking_id: int
     price: float
+
+
+class PaymentCallbackRequest(BaseModel):
+    order_id: str
+    transaction_status: str
 
 
 blast_results = {}
@@ -106,5 +111,18 @@ async def generate_payment_link(request: GeneratePaymentLinkRequest):
 
 
 @app.post("/payment-callback")
-async def payment_callback():
-    return
+async def payment_callback(request: PaymentCallbackRequest):
+    try:
+        booking_id = request.order_id
+        transaction_status = request.transaction_status
+
+        if not booking_id:
+            raise HTTPException(
+                status_code=400, detail="Missing order_id in payload")
+
+        # Add Update transaction query here
+
+        logger.info("payment success", transaction_status, booking_id)
+    except Exception as e:
+        logger.error(f"Failed to handle payment callback: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error")
