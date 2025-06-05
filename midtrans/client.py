@@ -1,3 +1,5 @@
+import random
+import uuid
 from midtrans.config import create_midtrans_client
 
 
@@ -6,7 +8,7 @@ def create_payment_link(booking_id: str, price: float) -> str:
 
     transaction_params = {
         "transaction_details": {
-            "order_id": booking_id,
+            "order_id": f"{booking_id}_{str(uuid.uuid4())[:4]}",
             "gross_amount": price,
         },
         "item_details": [

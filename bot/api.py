@@ -114,13 +114,18 @@ async def generate_payment_link(request: GeneratePaymentLinkRequest):
 async def payment_callback(request: PaymentCallbackRequest):
     if (request.transaction_status == "settlement"):
         try:
-            user_id, room_id = request.order_id.split("_")
+            user_id, room_id, _ = request.order_id.split("_")
             if (telegram_bot):
                 await telegram_bot.send_message_to_user(
                     user_id=user_id,
                     message=f"✅ Pembayaran untuk kamar {room_id} telah berhasil",
                     parse_mode="markdown"
                 )
+
+                update_room_colors_in_sheet([{
+                    "room_id": room_id,
+                    "is_available": False
+                }])
 
                 return {
                     "status": "success",

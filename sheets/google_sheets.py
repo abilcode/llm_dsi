@@ -34,10 +34,16 @@ GREEN = CellFormat(backgroundColor=Color(0.0, 1.0, 0.0))
 RED = CellFormat(backgroundColor=Color(1.0, 0.0, 0.0))
 
 room_id_to_cell = {
-    1: "B5",
-    2: "B8",
-    3: "E5",
-    4: "E8"
+    "R001": "B6",
+    "R003": "B9",
+    "R004": "E6",
+    "R005": "H6",
+    "R007": "H9",
+    "R011": "K6",
+    "R013": "B16",
+    "R015": "B19",
+    "R016": "E16",
+    "R018": "E10",
 }
 
 
@@ -48,6 +54,7 @@ def update_room_colors_in_sheet(
     worksheet = sh.worksheet(SHEET_NAME)
 
     for room in room_availability:
+        print(room)
         room_id = room.get("room_id")
         is_available = room.get("is_available")
 
