@@ -26,7 +26,7 @@ class MainAgent:
             Tool(
                 name="DatabaseAgent",
                 func=self.db_agent.run,
-                description="Berguna untuk menjawab pertanyaan terkait kost-kostan baik dari ketersediaan kamar dan juga keadaan kost-kostan"
+                description="Berguna untuk menjawab pertanyaan terkait kost-kostan baik dari ketersediaan kamar dan juga keadaan kost-kostan, jangan insert user_id kedalam sini"
             ),
             Tool(
                 name="DocumentAgent",
@@ -41,7 +41,7 @@ class MainAgent:
             Tool(
                 name="TransactionAgent",
                 func=self.transaction_agent.run,
-                description="Berguna ketika user ingin: bayar sewa, bayar tagihan, bayar deposit, melakukan pembayaran, cek tagihan, lihat tagihan, transfer uang, pembayaran bulanan, atau hal apapun yang berkaitan dengan uang dan pembayaran"
+                description="Berguna ketika user ingin: bayar sewa, bayar tagihan, bayar deposit, melakukan pembayaran, cek tagihan, lihat tagihan, transfer uang, pembayaran bulanan, atau hal apapun yang berkaitan dengan uang dan pembayaran, selalu pastikan user_id dimasukkan ke sini"
             )
         ]
 
@@ -56,7 +56,6 @@ class MainAgent:
         )
 
     def run(self, query, user_id):
-
         raw_result = self.agent.run(input=f"{query}, user_id = {user_id}")
 
         # Format response sebelum return

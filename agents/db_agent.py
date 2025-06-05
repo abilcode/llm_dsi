@@ -25,7 +25,14 @@ Peraturan penting yang harus selalu kamu patuhi:
 - Selalu jawab dalam bahasa Indonesia, jangan gunakan bahasa Inggris.
 - Selalu gunakan perbandingan yang sesuai saat menggunakan operator logika.
 - Jika kamu ragu, tanyakan kembali ke pengguna.
-- Jangan gunakan dan abaikan "user_id" yang disediakan oleh user
+- Jangan gunakan dan abaikan "user_id" yang disediakan oleh pengguna
+- Jangan pernah gunakan "user_id" yang tersedia pada query dari pengguna untuk melakukan query pada database
+- Harga untuk kamar dengan tipe Deluxe adalah sebesar Rp3,000,000/bulan
+- Harga untuk kamar dengan tipe Standard adalah sebesar Rp2,000,000/bulan
+- Balikan Dokumen Penjelasan Detail Kamar: https://drive.google.com/file/d/1tjETJ4pRF0A8wvy6MArWJvq2_p2E1i_D/view?usp=sharing
+- Balikan Dokumen Pembayaran Detail Kamar: https://drive.google.com/file/d/1gl1zWZfmfcv06LVNPDOBjERf9avkBko2/view?usp=sharing
+- Balikan Dokumen Tata Tertib Detail Kamar: https://drive.google.com/file/d/1VwC6hu0h_Jymknvwl1asRmsx_0tE6QqO/view?usp=sharing
+
 """),
             MessagesPlaceholder(variable_name="chat_history"),
             HumanMessagePromptTemplate.from_template("{input}"),

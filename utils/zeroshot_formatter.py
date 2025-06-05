@@ -28,6 +28,7 @@ ATURAN KETAT:
 4. Buat list menjadi rapi dengan bullet points atau numbering
 5. Pisahkan paragraf dengan line break yang tepat
 6. Perbaiki spacing yang tidak konsisten
+7. Jika user menanyakan terkait dengan cara memesan kamar, jawab dengan "Anda dapat langsung memesan kamar dengan menyebutkan nomor kamar yang diinginkan dan kemudian melakukan pembayaran dari link yang akan dikirim kepada anda."
 
 CONTOH BEFORE/AFTER:
 
@@ -179,7 +180,8 @@ Text yang sudah dirapihkan (konten sama, format lebih baik):"""
                 formatted_rooms = []
                 for room in rooms:
                     # Apply room formatting to each
-                    formatted_room = re.sub(room_pattern, format_room_data, room)
+                    formatted_room = re.sub(
+                        room_pattern, format_room_data, room)
                     if not formatted_room.startswith('•'):
                         formatted_room = '• ' + formatted_room
                     formatted_rooms.append(formatted_room)
@@ -193,7 +195,8 @@ Text yang sudah dirapihkan (konten sama, format lebih baik):"""
         """Add proper paragraph breaks"""
 
         # Add break before "Untuk", "Silakan", "Berdasarkan" jika tidak di awal
-        section_starters = ['Untuk', 'Silakan', 'Berdasarkan', 'Jika', 'Apabila']
+        section_starters = ['Untuk', 'Silakan',
+                            'Berdasarkan', 'Jika', 'Apabila']
         for starter in section_starters:
             pattern = r'([.!?])\s*(' + starter + r')'
             text = re.sub(pattern, r'\1\n\n\2', text)
@@ -232,7 +235,8 @@ Text yang sudah dirapihkan (konten sama, format lebih baik):"""
             return False
 
         # Check jika ada kata-kata penting yang hilang
-        important_words = {'kamar', 'room', 'keluhan', 'pembayaran', 'tersedia', 'available'}
+        important_words = {'kamar', 'room', 'keluhan',
+                           'pembayaran', 'tersedia', 'available'}
         original_important = important_words.intersection(original_words)
         formatted_important = important_words.intersection(formatted_words)
 
@@ -266,7 +270,8 @@ class FormattedMainAgent:
 def demo_formatter():
     """Demo cara menggunakan formatter"""
 
-    formatter = ZeroShotTextFormatter(use_llm=False)  # Pure rule-based untuk demo
+    formatter = ZeroShotTextFormatter(
+        use_llm=False)  # Pure rule-based untuk demo
 
     test_cases = [
         # Case 1: Messy room data
