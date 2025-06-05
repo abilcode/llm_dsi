@@ -10,6 +10,7 @@ from langchain.chat_models import ChatOpenAI
 from tools.db_tools import db_tools
 from langchain.schema import AIMessage, HumanMessage
 
+
 class DBAgentWrapper:
     def __init__(self):
         prompt = ChatPromptTemplate.from_messages([
@@ -24,6 +25,7 @@ Peraturan penting yang harus selalu kamu patuhi:
 - Selalu jawab dalam bahasa Indonesia, jangan gunakan bahasa Inggris.
 - Selalu gunakan perbandingan yang sesuai saat menggunakan operator logika.
 - Jika kamu ragu, tanyakan kembali ke pengguna.
+- Jangan gunakan dan abaikan "user_id" yang disediakan oleh user
 """),
             MessagesPlaceholder(variable_name="chat_history"),
             HumanMessagePromptTemplate.from_template("{input}"),
@@ -32,7 +34,8 @@ Peraturan penting yang harus selalu kamu patuhi:
 
         llm = ChatOpenAI(model="gpt-4", temperature=0)
         agent = OpenAIFunctionsAgent(llm=llm, prompt=prompt, tools=db_tools)
-        self.executor = AgentExecutor(agent=agent, tools=db_tools, verbose=True)
+        self.executor = AgentExecutor(
+            agent=agent, tools=db_tools, verbose=True)
         self.chat_history = []
 
     def ask(self, user_input: str) -> str:

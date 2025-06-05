@@ -28,7 +28,7 @@ class SingleMessageRequest(BaseModel):
 
 
 class GeneratePaymentLinkRequest(BaseModel):
-    booking_id: int
+    booking_id: str
     price: float
 
 
@@ -112,17 +112,22 @@ async def generate_payment_link(request: GeneratePaymentLinkRequest):
 
 @app.post("/payment-callback")
 async def payment_callback(request: PaymentCallbackRequest):
-    try:
-        booking_id = request.order_id
-        transaction_status = request.transaction_status
+    if (request.transaction_status == "settlement"):
+        try:
+            user_id, room_id = request.order_id.split("_")
+            if (telegram_bot):
+                await telegram_bot.send_message_to_user(
+                    user_id=user_id,
+                    message=f"✅ Pembayaran untuk kamar {room_id} telah berhasil",
+                    parse_mode="markdown"
+                )
 
-        if not booking_id:
+                return {
+                    "status": "success",
+                    "message": f"Message sent to users {user_id}",
+                    "timestamp": datetime.now()
+                }
+        except Exception as e:
+            logger.error(f"Failed to handle payment callback: {e}")
             raise HTTPException(
-                status_code=400, detail="Missing order_id in payload")
-
-        # Add Update transaction query here
-
-        logger.info("payment success", transaction_status, booking_id)
-    except Exception as e:
-        logger.error(f"Failed to handle payment callback: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error")
+                status_code=500, detail="Internal server error")
