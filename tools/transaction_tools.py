@@ -1,14 +1,22 @@
 from langchain.tools import Tool
 
-def send_payment_link(user_request: str):
+from midtrans.client import create_payment_link
+
+
+def send_payment_link(id: str):
     """Send payment form link to user when they want to make a transaction"""
     print("Menuju ke link pembayaran/transaksi")
-    return "Silakan klik link berikut untuk melakukan pembayaran: https://payment-form.guesthouse.com/payment"
+    payment_link = create_payment_link(id, 1_500_000)
+    return f"Silakan klik link berikut untuk melakukan pembayaran: {payment_link}"
 
-def send_bill_check_link(user_request: str):
+
+def send_bill_check_link(user_id: str, room_id: str):
     """Send bill checking form link to user when they want to check their bills"""
+    print(user_id, room_id)
+
     print("Menuju ke link pengecekan tagihan")
     return "Silakan klik link berikut untuk mengecek tagihan Anda: https://payment-form.guesthouse.com/check-bills"
+
 
 # Tools
 transaction_tools = [

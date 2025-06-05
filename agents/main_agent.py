@@ -7,6 +7,7 @@ from agents.complaint_agent import ComplaintAgentWrapper
 from agents.transaction_agent import TransactionAgentWrapper
 from utils.zeroshot_formatter import ZeroShotTextFormatter
 
+
 class MainAgent:
     def __init__(self):
         self.llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
@@ -56,7 +57,7 @@ class MainAgent:
 
     def run(self, query, user_id):
 
-        raw_result = self.agent.run(input=query)
+        raw_result = self.agent.run(input=f"{query}, user_id = {user_id}")
 
         # Format response sebelum return
         formatted_result = self.formatter.format_text(raw_result)

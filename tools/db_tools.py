@@ -1,11 +1,3 @@
-from langchain.agents import OpenAIFunctionsAgent, AgentExecutor
-from langchain.prompts import (
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-    MessagesPlaceholder
-)
-from langchain.schema import SystemMessage
-from langchain.chat_models import ChatOpenAI
 from langchain.tools import Tool
 from pydantic.v1 import BaseModel
 from typing import List
@@ -15,17 +7,21 @@ import pandas as pd
 # === Better DB tools implemented inline here ===
 conn = sqlite3.connect("guest_rooms.db")
 
+
 def list_tables():
     c = conn.cursor()
     c.execute("SELECT name FROM sqlite_master WHERE type='table';")
     rows = c.fetchall()
     return "\n".join(row[0] for row in rows if row[0] is not None)
 
+
 def describe_tables(table_names: List[str]):
     c = conn.cursor()
     tables = ', '.join("'" + table + "'" for table in table_names)
-    rows = c.execute(f"SELECT sql FROM sqlite_master WHERE type='table' and name IN ({tables});")
+    rows = c.execute(
+        f"SELECT sql FROM sqlite_master WHERE type='table' and name IN ({tables});")
     return '\n'.join(row[0] for row in rows if row[0] is not None)
+
 
 def run_sqlite_query(query: str):
     c = conn.cursor()
@@ -34,6 +30,7 @@ def run_sqlite_query(query: str):
         return c.fetchall()
     except sqlite3.OperationalError as e:
         return f"Terjadi error saat menjalankan query: {str(e)}"
+
 
 def pandas_sqlite_query(query: str):
     try:
@@ -47,14 +44,19 @@ def pandas_sqlite_query(query: str):
         return f"Terjadi error saat menjalankan query Pandas: {str(e)}"
 
 # === Tool schemas ===
+
+
 class RunQueryArgsSchema(BaseModel):
     query: str
+
 
 class DescribeTablesArgsSchema(BaseModel):
     table_names: List[str]
 
+
 class PandasQueryArgsSchema(BaseModel):
     query: str
+
 
 # === Tools ===
 db_tools = [
