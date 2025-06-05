@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Rental Payment Reminder</title>
+    <style type="text/css">
+        /* Base Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+            color: #333333;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(to right, #28a745, #1e7e34);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+            margin: 0;
+        }
+        
+        /* Content */
+        .content {
+            padding: 30px;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+        
+        .greeting strong {
+            color: #28a745;
+        }
+        
+        .reminder-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555555;
+            margin-bottom: 25px;
+        }
+        
+        /* Payment Details */
+        .payment-details {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .detail-row {
+            display: table;
+            width: 100%;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eeeeee;
+        }
+        
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            display: table-cell;
+            width: 120px;
+            font-weight: 600;
+            color: #495057;
+            vertical-align: top;
+        }
+        
+        .detail-value {
+            display: table-cell;
+            color: #212529;
+            font-weight: 500;
+        }
+        
+        .highlight {
+            color: #28a745;
+            font-weight: 700;
+        }
+        
+        /* Button */
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .pay-button {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            padding: 14px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+        
+        /* Payment Methods */
+        .payment-methods {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #6c757d;
+            font-size: 14px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .contact {
+            margin: 15px 0;
+        }
+        
+        .contact-item {
+            display: inline-block;
+            margin: 0 10px;
+        }
+        
+        .copyright {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        /* Responsive */
+        @media only screen and (max-width: 480px) {
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .detail-label {
+                width: 100px;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 20px;">
+    <div class="container">
+        <div class="header">
+            <h1>Upcoming Room Rental Payment</h1>
+            <p>Friendly reminder about your upcoming payment</p>
+        </div>
+        
+        <div class="content">
+            <div class="greeting">
+                Hi <strong>{{ full_name }}</strong>,
+            </div>
+            
+            <p class="reminder-text">
+                This is a reminder that your room rental payment is upcoming. Below are the payment details:
+            </p>
+            
+            <div class="payment-details">
+                <div class="detail-row">
+                    <div class="detail-label">Payment Date:</div>
+                    <div class="detail-value"><span class="highlight">{{ due_date }}</span></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Amount:</div>
+                    <div class="detail-value"><span class="highlight">Rp {{ amount }}</span></div>
+                </div>
+                
+                <div class="detail-row">
+                    <div class="detail-label">Payment For:</div>
+                    <div class="detail-value">Monthly Room Rental Fee</div>
+                </div>
+            </div>
+            
+            <div class="button-container">
+                <a href="{{ payment_link }}" class="pay-button" target="_blank">
+                    Pay Now
+                </a>
+            </div>
+            
+            <div class="payment-methods">
+                Accepted payment methods: Bank Transfer, Credit Card, E-Wallet
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>If you have already made the payment, please disregard this reminder.</p>
+            
+            <div class="contact">
+                <span class="contact-item">billing@kosanexample.com</span>
+                <span class="contact-item">+62 21 1234 5678</span>
+                <span class="contact-item">Jakarta, Indonesia</span>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Kosan Example. All rights reserved.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

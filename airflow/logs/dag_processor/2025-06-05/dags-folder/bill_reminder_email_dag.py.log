@@ -1,0 +1,4 @@
+{"timestamp":"2025-06-05T01:22:41.362540","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/bill_reminder_email_dag.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-06-05T01:22:58.389475","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/bill_reminder_email_dag.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-06-05T01:23:28.574745","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/bill_reminder_email_dag.py","logger":"airflow.models.dagbag.DagBag"}
+{"timestamp":"2025-06-05T01:23:58.798959","level":"info","event":"Filling up the DagBag from /opt/airflow/dags/bill_reminder_email_dag.py","logger":"airflow.models.dagbag.DagBag"}
