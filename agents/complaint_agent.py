@@ -64,7 +64,7 @@ Contoh percakapan:
             MessagesPlaceholder(variable_name="agent_scratchpad"),
         ])
 
-        llm = ChatOpenAI(model="gpt-4", temperature=0)
+        llm = ChatOpenAI(model="gpt-4.1", temperature=0)
         agent = OpenAIFunctionsAgent(llm=llm, prompt=prompt, tools=complaint_tools)
         self.executor = AgentExecutor(agent=agent, tools=complaint_tools, verbose=True)
         self.chat_history = []

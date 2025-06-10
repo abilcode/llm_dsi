@@ -8,7 +8,7 @@ class ZeroShotTextFormatter:
     Fokus pada formatting visual: spacing, line breaks, bullet points, dll.
     """
 
-    def __init__(self, use_llm: bool = True, model_name: str = "gpt-3.5-turbo"):
+    def __init__(self, use_llm: bool = True, model_name: str = "gpt-4.1-mini"):
         self.use_llm = use_llm
         if use_llm:
             from langchain.chat_models import ChatOpenAI

@@ -1,5 +1,4 @@
 import json
-import logging
 from typing import Optional, List
 from langchain.agents import OpenAIFunctionsAgent, AgentExecutor
 from langchain.prompts import (
@@ -10,16 +9,13 @@ from langchain.prompts import (
 from langchain.schema import SystemMessage, AIMessage, HumanMessage
 from langchain.chat_models import ChatOpenAI
 from tools.qa_tools import setup_document_retriever
-
-# Setup logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from utils.logger import logger
 
 
 class QAAgentWrapper:
     """Professional Q&A Agent for Guest House Document Retrieval"""
 
-    def __init__(self, model: str = "gpt-3.5-turbo", temperature: float = 0.1):
+    def __init__(self, model: str = "gpt-4.1-mini", temperature: float = 0.1):
         """
         Initialize the Q&A Agent
 
@@ -288,7 +284,7 @@ Ingat: Tujuan Anda adalah memberikan pelayanan informasi terbaik untuk membantu 
         }
 
 
-def create_qa_agent(model: str = "gpt-3.5-turbo", temperature: float = 0.1) -> QAAgentWrapper:
+def create_qa_agent(model: str = "gpt-4.1-mini", temperature: float = 0.1) -> QAAgentWrapper:
     """
     Factory function to create Q&A agent
 

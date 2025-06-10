@@ -39,7 +39,7 @@ Peraturan penting yang harus selalu kamu patuhi:
             MessagesPlaceholder(variable_name="agent_scratchpad"),
         ])
 
-        llm = ChatOpenAI(model="gpt-4", temperature=0)
+        llm = ChatOpenAI(model="gpt-4.1", temperature=0)
         agent = OpenAIFunctionsAgent(llm=llm, prompt=prompt, tools=db_tools)
         self.executor = AgentExecutor(
             agent=agent, tools=db_tools, verbose=True)

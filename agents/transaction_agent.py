@@ -82,7 +82,7 @@ class TransactionAgentWrapper:
             MessagesPlaceholder(variable_name="agent_scratchpad"),
         ])
 
-        llm = ChatOpenAI(model="gpt-4", temperature=0)
+        llm = ChatOpenAI(model="gpt-4.1", temperature=0)
         agent = OpenAIFunctionsAgent(
             llm=llm, prompt=prompt, tools=transaction_tools)
         self.executor = AgentExecutor(
