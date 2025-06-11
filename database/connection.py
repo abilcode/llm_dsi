@@ -27,61 +27,127 @@ class DatabaseConnection:
             logger.info("Database connection closed.")
 
 class BaseRepository:
-    def __init__(self, table_name):
-        self.table_name = table_name
+    def __init__(self):
+        pass
 
-    async def insert(self, conn, data: dict):
+    async def insert(self, conn, query: str, *args):
+        """
+        Execute an INSERT SQL statement.
+
+        Args:
+            conn: The asyncpg connection object.
+            query (str): The SQL INSERT query.
+            *args: Parameters for the query.
+
+        Returns:
+            The inserted record.
+        """
         try:
-            columns = ', '.join(data.keys())
-            values = ', '.join(f'${i+1}' for i in range(len(data)))
-            query = f"INSERT INTO {self.table_name} ({columns}) VALUES ({values}) RETURNING *"
-            result = await conn.fetchrow(query, *data.values())
-            logger.info(f"Inserted into {self.table_name}: {result}")
+            result = await conn.fetchrow(query, *args)
+            logger.info(f"Insert executed: {query} | Params: {args} | Result: {result}")
             return result
         except Exception as e:
-            logger.error(f"Insert failed: {e}")
+            logger.error(f"Insert failed: {e} | Query: {query} | Params: {args}")
             raise
 
-    async def delete(self, conn, id_column, id_value):
+    async def delete(self, conn, query: str, *args):
+        """
+        Execute a DELETE SQL statement.
+
+        Args:
+            conn: The asyncpg connection object.
+            query (str): The SQL DELETE query.
+            *args: Parameters for the query.
+
+        Returns:
+            The deleted record.
+        """
         try:
-            query = f"DELETE FROM {self.table_name} WHERE {id_column} = $1 RETURNING *"
-            result = await conn.fetchrow(query, id_value)
-            logger.info(f"Deleted from {self.table_name}: {result}")
+            result = await conn.fetchrow(query, *args)
+            logger.info(f"Delete executed: {query} | Params: {args} | Result: {result}")
             return result
         except Exception as e:
-            logger.error(f"Delete failed: {e}")
+            logger.error(f"Delete failed: {e} | Query: {query} | Params: {args}")
             raise
 
-    async def select_one(self, conn, id_column, id_value):
+    async def select_one(self, conn, query: str, *args):
+        """
+        Execute a SELECT SQL statement to fetch a single record.
+
+        Args:
+            conn: The asyncpg connection object.
+            query (str): The SQL SELECT query.
+            *args: Parameters for the query.
+
+        Returns:
+            The first matching record or None.
+        """
         try:
-            query = f"SELECT * FROM {self.table_name} WHERE {id_column} = $1"
-            result = await conn.fetchrow(query, id_value)
-            logger.info(f"Selected one from {self.table_name}: {result}")
+            result = await conn.fetchrow(query, *args)
+            logger.info(f"Select one executed: {query} | Params: {args} | Result: {result}")
             return result
         except Exception as e:
-            logger.error(f"Select one failed: {e}")
+            logger.error(f"Select one failed: {e} | Query: {query} | Params: {args}")
             raise
 
-    async def fetch_all(self, conn):
+    async def fetch_all(self, conn, query: str, *args):
+        """
+        Execute a SELECT SQL statement to fetch all matching records.
+
+        Args:
+            conn: The asyncpg connection object.
+            query (str): The SQL SELECT query.
+            *args: Parameters for the query.
+
+        Returns:
+            List of records matching the query.
+        """
         try:
-            query = f"SELECT * FROM {self.table_name}"
-            results = await conn.fetch(query)
-            logger.info(f"Fetched all from {self.table_name}: {len(results)} records")
+            results = await conn.fetch(query, *args)
+            logger.info(f"Fetch all executed: {query} | Params: {args} | Records: {len(results)}")
             return results
         except Exception as e:
-            logger.error(f"Fetch all failed: {e}")
+            logger.error(f"Fetch all failed: {e} | Query: {query} | Params: {args}")
             raise
 
-    async def update(self, conn, id_column, id_value, data: dict):
+    async def update(self, conn, query: str, *args):
+        """
+        Execute an UPDATE SQL statement.
+
+        Args:
+            conn: The asyncpg connection object.
+            query (str): The SQL UPDATE query.
+            *args: Parameters for the query.
+
+        Returns:
+            The updated record.
+        """
         try:
-            set_clause = ', '.join(f"{k} = ${i+2}" for i, k in enumerate(data.keys()))
-            query = f"UPDATE {self.table_name} SET {set_clause} WHERE {id_column} = $1 RETURNING *"
-            params = [id_value] + list(data.values())
-            result = await conn.fetchrow(query, *params)
-            logger.info(f"Updated {self.table_name}: {result}")
+            result = await conn.fetchrow(query, *args)
+            logger.info(f"Update executed: {query} | Params: {args} | Result: {result}")
             return result
         except Exception as e:
-            logger.error(f"Update failed: {e}")
+            logger.error(f"Update failed: {e} | Query: {query} | Params: {args}")
+            raise
+
+    async def execute_query(self, conn, query: str, *args):
+        """
+        Execute a custom SQL query.
+
+        Args:
+            conn: The asyncpg connection object.
+            query (str): The SQL query to execute.
+            *args: Parameters for the query.
+
+        Returns:
+            Query result.
+        """
+        try:
+            result = await conn.fetch(query, *args)
+            logger.info(f"Custom query executed: {query} | Params: {args} | Result: {result}")
+            return result
+        except Exception as e:
+            logger.error(f"Custom query execution failed: {e} | Query: {query} | Params: {args}")
             raise
 
 from databases import Database

@@ -45,7 +45,7 @@ class MainAgent:
             Tool(
                 name="TransactionAgent",
                 func=self.transaction_agent.run,
-                description="Berguna ketika user ingin: bayar sewa, bayar tagihan, bayar deposit, melakukan pembayaran, cek tagihan, lihat tagihan, transfer uang, pembayaran bulanan, atau hal apapun yang berkaitan dengan uang dan pembayaran, selalu pastikan user_id dimasukkan ke sini"
+                description="Berguna ketika user ingin: bayar sewa, bayar tagihan, bayar deposit, melakukan pembayaran, cek tagihan, lihat tagihan, transfer uang, pembayaran bulanan, atau hal apapun yang berkaitan dengan uang dan pembayaran, selalu pastikan user_id dimasukkan ke sini. List harga tagihan dan harga kosan ada di DATABASE AGENT."
             )
         ]
 
@@ -62,6 +62,7 @@ class MainAgent:
     async def run(self, query, user_id):
 
         try:
+            print(f"Run Main Agent")
             jakarta_tz = pytz.timezone('Asia/Jakarta')
             sent_at = datetime.now(jakarta_tz)
 
@@ -78,7 +79,7 @@ class MainAgent:
 
         # Run agent
         try:
-            raw_result = self.agent.run(input=f"{query}, user_id = {user_id}")
+            raw_result = self.agent.run(input=f"{query}, telegram_id = {user_id}")
         except Exception as e:
             logger.error(f"Error running agent: {e}")
             raise

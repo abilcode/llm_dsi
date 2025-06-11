@@ -50,7 +50,7 @@ class TelegramBot:
         if (update.message):
             try:
                 await update.message.reply_text("🔄 Mohon Menunggu, Bapak Kos sedang mencari informasi", parse_mode='Markdown')
-                agent_response = self.agent.run(update.message.text, user_id)
+                agent_response = await self.agent.run(update.message.text, user_id)
                 await update.message.reply_text(agent_response, parse_mode='Markdown')
             except:
                 await update.message.reply_text("❌ Pak Kos bingung, bisa coba lebih spesifik lagi ya", parse_mode='Markdown')

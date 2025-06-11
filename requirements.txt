@@ -16,3 +16,4 @@ gspread==6.2.1
 gspread-formatting==1.2.1
 google-auth
 midtransclient
+psycopg2

@@ -29,10 +29,11 @@ class DocumentQATool:
     def _initialize_components(self):
         """Initialize embeddings, vector database, and QA chain"""
         try:
-            logger.info("Initializing Document Q&A components...")
+            logger.info(f"Initializing Document Q&A components with directory: {self.persist_dir} ...")
 
             # Initialize embeddings
             self.embeddings = OpenAIEmbeddings()
+            logger.info("Init embedding OpenAI success.")
 
             # Initialize vector database
             self.db = Chroma(

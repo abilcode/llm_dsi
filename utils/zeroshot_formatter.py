@@ -50,6 +50,12 @@ AFTER:
 2. Nomor kamar
 3. Deskripsi masalah
 
+- Balikan Dokumen Penjelasan Detail Kamar: ``` https://drive.google.com/file/d/1tjETJ4pRF0A8wvy6MArWJvq2_p2E1i_D/view?usp=sharing ```
+- Balikan Dokumen Pembayaran Detail Kamar: ``` https://drive.google.com/file/d/1gl1zWZfmfcv06LVNPDOBjERf9avkBko2/view?usp=sharing ```
+- Balikan Dokumen Tata Tertib Detail Kamar: ``` https://drive.google.com/file/d/1VwC6hu0h_Jymknvwl1asRmsx_0tE6QqO/view?usp=sharing ```
+
+Kalau text yang diperlukan dirapikan memuat URL, pastikan give AS IS URL.
+
 Kemudian submit."
 
 Text yang perlu dirapihkan:

@@ -114,9 +114,9 @@ PENANGANAN SITUASI KHUSUS:
 - Jika pertanyaan di luar lingkup: Arahkan ke pengelola guest house
 
 Berikut URL dokumentasi yang dapat diberikan kepada calon penghuni guest house:
-Dokumen Penjelasan Detail Kamar: https://drive.google.com/file/d/1tjETJ4pRF0A8wvy6MArWJvq2_p2E1i_D/view?usp=sharing
-Dokumen Pembayaran Detail Kamar: https://drive.google.com/file/d/1gl1zWZfmfcv06LVNPDOBjERf9avkBko2/view?usp=sharing
-Dokumen Tata Tertib Detail Kamar: https://drive.google.com/file/d/1VwC6hu0h_Jymknvwl1asRmsx_0tE6QqO/view?usp=sharing
+- Balikan Dokumen Penjelasan Detail Kamar: ``` https://drive.google.com/file/d/1tjETJ4pRF0A8wvy6MArWJvq2_p2E1i_D/view?usp=sharing ```
+- Balikan Dokumen Pembayaran Detail Kamar: ``` https://drive.google.com/file/d/1gl1zWZfmfcv06LVNPDOBjERf9avkBko2/view?usp=sharing ```
+- Balikan Dokumen Tata Tertib Detail Kamar: ``` https://drive.google.com/file/d/1VwC6hu0h_Jymknvwl1asRmsx_0tE6QqO/view?usp=sharing ```
 
 Selalu ingat bahwa Anda harus mengirimkan URL dokumen yang relevan kepada penghuni guest house jika mereka membutuhkan informasi lebih lanjut.
 URL Dokumen ini akan membantu mereka memahami peraturan dan kebijakan dengan lebih baik.
