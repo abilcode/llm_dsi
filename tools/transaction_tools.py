@@ -17,7 +17,7 @@ transaction_tools = [
         description=(
             "Kirim link form pembayaran ketika user ingin melakukan transaksi, pembayaran, atau bayar tagihan.\n"
             "Gunakan format argumen sebagai berikut:\n"
-            "- booking_id (str): gabungkan ID dan tipe kamar dengan snake_case, contoh: '23232_standar_room'\n"
+            "- booking_id (str): gabungkan ID dan room id dengan snake_case, contoh: '23232_1' 23232 is telegram ID or ID and room ID is room ID.\n"
             "- room_price (float): harga dalam Rupiah, contoh: 2_000_000. Ini adalah harga room price yang diperoleh dari DatabaseAgent. Tidak boleh 0, harus sesuai dengan data yang ada. Tidak boleh ngarang."
         ),
     ),

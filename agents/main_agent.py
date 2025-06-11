@@ -45,7 +45,7 @@ class MainAgent:
             Tool(
                 name="TransactionAgent",
                 func=self.transaction_agent.run,
-                description="Berguna ketika user ingin: bayar sewa, bayar tagihan, bayar deposit, melakukan pembayaran, cek tagihan, lihat tagihan, transfer uang, pembayaran bulanan, atau hal apapun yang berkaitan dengan uang dan pembayaran, selalu pastikan user_id dimasukkan ke sini. List harga tagihan dan harga kosan ada di DATABASE AGENT."
+                description="Berguna ketika user ingin: bayar sewa, bayar tagihan, bayar deposit, melakukan pembayaran, cek tagihan, lihat tagihan, transfer uang, pembayaran bulanan, atau hal apapun yang berkaitan dengan uang dan pembayaran, selalu pastikan user_id dimasukkan ke sini. List harga tagihan dan harga kosan ada di DATABASE AGENT. Butuh informasi hingga room ID"
             )
         ]
 
