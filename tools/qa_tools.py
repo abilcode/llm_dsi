@@ -5,17 +5,13 @@ from langchain.chat_models import ChatOpenAI
 from langchain.tools import Tool
 from langchain.schema import Document
 from typing import List
-import logging
-
-# Setup logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from utils.logger import logger
 
 
 class DocumentQATool:
     """Professional document Q&A tool for guest house management system"""
 
-    def __init__(self, persist_dir: str = "emb_qa", model: str = "gpt-3.5-turbo"):
+    def __init__(self, persist_dir: str = "emb_qa", model: str = "gpt-4.1-mini"):
         """
         Initialize the Document Q&A Tool
 
@@ -33,10 +29,11 @@ class DocumentQATool:
     def _initialize_components(self):
         """Initialize embeddings, vector database, and QA chain"""
         try:
-            logger.info("Initializing Document Q&A components...")
+            logger.info(f"Initializing Document Q&A components with directory: {self.persist_dir} ...")
 
             # Initialize embeddings
             self.embeddings = OpenAIEmbeddings()
+            logger.info("Init embedding OpenAI success.")
 
             # Initialize vector database
             self.db = Chroma(
@@ -174,7 +171,7 @@ class DocumentQATool:
             return "Silakan ajukan pertanyaan mengenai peraturan guest house."
 
 
-def setup_document_retriever(persist_dir: str = "emb_qa", model: str = "gpt-3.5-turbo") -> List[Tool]:
+def setup_document_retriever(persist_dir: str = "emb_qa", model: str = "gpt-4.1-mini") -> List[Tool]:
     """
     Initialize and return document retrieval tools
 

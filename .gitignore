@@ -4,3 +4,4 @@
 Pipfile
 Pipfile.lock
 llm_dsi
+*.pyc
