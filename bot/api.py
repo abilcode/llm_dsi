@@ -5,6 +5,7 @@ from typing import Dict, List, Optional
 from datetime import datetime
 
 from database.db_operator.booking import BookingRepository
+from database.db_operator.rooms import RoomsRepository
 from midtrans.client import create_payment_link
 from utils.logger import logger
 from database.connection import DatabaseConnection, database
@@ -117,9 +118,11 @@ async def payment_callback(request: PaymentCallbackRequest):
         try:
             user_id, room_id, _ = request.order_id.split("_")
 
-            async with DatabaseConnection() as conn:
+            async with DatabaseConnection() as conn:  # type: ignore
                 booking_db = BookingRepository()
+                rooms_db = RoomsRepository()
                 await booking_db.update_booking_status_by_telegram_and_room(conn=conn, telegram_id=user_id, room_id=room_id, new_status="checked_in")
+                await rooms_db.update_room_availability_by_id(conn=conn, is_available=False, room_id=room_id)
 
             if (telegram_bot):
                 await telegram_bot.send_message_to_user(

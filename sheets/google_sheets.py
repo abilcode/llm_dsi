@@ -35,8 +35,9 @@ RED = CellFormat(backgroundColor=Color(1.0, 0.0, 0.0))
 
 room_id_to_cell = {
     "1": "B6",
-    "2": "B9",
-    "3": "E6",
+    "2": "C6",
+    "3": "E5",
+    "4": "H4",
 }
 
 

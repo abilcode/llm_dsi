@@ -34,7 +34,7 @@ class BookingRepository:
 
         try:
             repo = BaseRepository()
-            booking_id = await repo.insert(conn, data)
+            booking_id = await repo.insert(conn, data)  # type: ignore
             logger.info(f"Inserted booking with id {booking_id}")
             return booking_id
         except Exception as e:
@@ -71,8 +71,8 @@ class BookingRepository:
     async def update_booking_status_by_telegram_and_room(
         self,
         conn: Any,
-        telegram_id: int,
-        room_id: int,
+        telegram_id: str,
+        room_id: str,
         new_status: str
     ) -> None:
         """
