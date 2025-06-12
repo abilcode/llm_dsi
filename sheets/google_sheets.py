@@ -34,17 +34,9 @@ GREEN = CellFormat(backgroundColor=Color(0.0, 1.0, 0.0))
 RED = CellFormat(backgroundColor=Color(1.0, 0.0, 0.0))
 
 room_id_to_cell = {
-    "R001": "B6",
-    "R002": "B9",
-    "R003": "E6",
-    "R004": "E9",
-    "R005": "H6",
-    "R007": "H9",
-    "R011": "K6",
-    "R013": "B16",
-    "R015": "B19",
-    "R016": "E16",
-    "R018": "E10",
+    "1": "B6",
+    "2": "B9",
+    "3": "E6",
 }
 
 

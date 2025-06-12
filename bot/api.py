@@ -4,9 +4,10 @@ from pydantic import BaseModel
 from typing import Dict, List, Optional
 from datetime import datetime
 
+from database.db_operator.booking import BookingRepository
 from midtrans.client import create_payment_link
 from utils.logger import logger
-from database.connection import database
+from database.connection import DatabaseConnection, database
 from sheets.google_sheets import update_room_colors_in_sheet
 
 
@@ -115,6 +116,11 @@ async def payment_callback(request: PaymentCallbackRequest):
     if (request.transaction_status == "settlement"):
         try:
             user_id, room_id, _ = request.order_id.split("_")
+
+            async with DatabaseConnection() as conn:
+                booking_db = BookingRepository()
+                await booking_db.update_booking_status_by_telegram_and_room(conn=conn, telegram_id=user_id, room_id=room_id, new_status="checked_in")
+
             if (telegram_bot):
                 await telegram_bot.send_message_to_user(
                     user_id=user_id,

@@ -7,7 +7,7 @@ from bot.api import app as api_app, init_bot
 from bot.bot import TelegramBot
 from utils.logger import logger
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 async def start_uvicorn():
