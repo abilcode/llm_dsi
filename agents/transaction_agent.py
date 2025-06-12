@@ -40,11 +40,6 @@ class TransactionAgentWrapper:
 
         prompt = ChatPromptTemplate.from_messages([
             SystemMessage(content=f"""Kamu adalah agen spesialis transaksi dan tagihan untuk sistem manajemen guest house.
-
-        🧩 Skema basis data yang digunakan:
-            bookings(booking_id, user_id, room_id, check_in, check_out, status, created_at)
-            payments(payment_id, booking_id, amount, paid_at, payment_method)
-            recurring_bills(bill_id, booking_id, due_date, amount, is_paid, created_at)
         
         Tugas utama kamu:
         - Mengarahkan tamu ke form pembayaran ketika mereka ingin melakukan transaksi untuk suatu kamar dengan kode tertentu
@@ -67,6 +62,7 @@ class TransactionAgentWrapper:
         - Jika tamu ingin melakukan pembayaran atau transaksi apapun, kirim link pembayaran.
         - Jika tamu ingin mengecek tagihan atau melihat status pembayaran, kirim link pengecekan tagihan.
         - Berikan penjelasan singkat tentang apa yang bisa dilakukan di link tersebut.
+        - Jika kamu membutuhkan data room id, kosan maka bisa mencari di Database Agent.
         
         Contoh percakapan:
         Pengguna: Saya mau bayar sewa bulan ini
