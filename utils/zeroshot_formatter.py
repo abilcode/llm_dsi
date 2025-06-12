@@ -8,7 +8,7 @@ class ZeroShotTextFormatter:
     Fokus pada formatting visual: spacing, line breaks, bullet points, dll.
     """
 
-    def __init__(self, use_llm: bool = True, model_name: str = "gpt-3.5-turbo"):
+    def __init__(self, use_llm: bool = True, model_name: str = "gpt-4.1-mini"):
         self.use_llm = use_llm
         if use_llm:
             from langchain.chat_models import ChatOpenAI
@@ -49,6 +49,12 @@ AFTER:
 1. Isi nama lengkap
 2. Nomor kamar
 3. Deskripsi masalah
+
+- Balikan Dokumen Penjelasan Detail Kamar: ``` https://drive.google.com/file/d/1tjETJ4pRF0A8wvy6MArWJvq2_p2E1i_D/view?usp=sharing ```
+- Balikan Dokumen Pembayaran Detail Kamar: ``` https://drive.google.com/file/d/1gl1zWZfmfcv06LVNPDOBjERf9avkBko2/view?usp=sharing ```
+- Balikan Dokumen Tata Tertib Detail Kamar: ``` https://drive.google.com/file/d/1VwC6hu0h_Jymknvwl1asRmsx_0tE6QqO/view?usp=sharing ```
+
+Kalau text yang diperlukan dirapikan memuat URL, pastikan give AS IS URL.
 
 Kemudian submit."
 

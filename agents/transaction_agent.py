@@ -41,9 +41,10 @@ class TransactionAgentWrapper:
         prompt = ChatPromptTemplate.from_messages([
             SystemMessage(content=f"""Kamu adalah agen spesialis transaksi dan tagihan untuk sistem manajemen guest house.
 
-        Skema basis data untuk transaksi dan tagihan yang sudah tersedia:
-        - transactions(transaction_id, guest_name, room_id, transaction_type, amount, description, status, payment_method, due_date, created_at, updated_at)
-        - bills(bill_id, guest_name, room_id, bill_type, amount, description, status, due_date, created_at)
+        🧩 Skema basis data yang digunakan:
+            bookings(booking_id, user_id, room_id, check_in, check_out, status, created_at)
+            payments(payment_id, booking_id, amount, paid_at, payment_method)
+            recurring_bills(bill_id, booking_id, due_date, amount, is_paid, created_at)
         
         Tugas utama kamu:
         - Mengarahkan tamu ke form pembayaran ketika mereka ingin melakukan transaksi untuk suatu kamar dengan kode tertentu
@@ -82,7 +83,7 @@ class TransactionAgentWrapper:
             MessagesPlaceholder(variable_name="agent_scratchpad"),
         ])
 
-        llm = ChatOpenAI(model="gpt-4", temperature=0)
+        llm = ChatOpenAI(model="gpt-4.1", temperature=0)
         agent = OpenAIFunctionsAgent(
             llm=llm, prompt=prompt, tools=transaction_tools)
         self.executor = AgentExecutor(

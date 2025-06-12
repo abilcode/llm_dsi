@@ -1,19 +1,19 @@
-langchain ==0.0.352
+langchain==0.0.352
 openai ==0.27.8
 python-dotenv ==1.0.0
 tiktoken
 chromadb
 pyboxen
 pandas
-pyfiglet
-fastapi
-pydantic
+pyfiglet==1.0.3
+fastapi==0.115.12
+pydantic==2.11.5
 typing
 datetime
 python-telegram-bot
-asyncpg
-databases
-gspread
-gspread-formatting
+asyncpg==0.30.0
+gspread==6.2.1
+gspread-formatting==1.2.1
 google-auth
 midtransclient
+psycopg2

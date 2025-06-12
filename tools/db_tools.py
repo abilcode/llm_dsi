@@ -1,50 +1,68 @@
 from langchain.tools import Tool
 from pydantic.v1 import BaseModel
 from typing import List
-import sqlite3
-import pandas as pd
+import psycopg2
+from database.connection import DATABASE_URL
 
-# === Better DB tools implemented inline here ===
-conn = sqlite3.connect("guest_rooms.db")
+class DatabaseConnection:
+    def __init__(self):
+        self.conn = psycopg2.connect(DATABASE_URL)
+        self.conn.autocommit = True
 
+    def __enter__(self):
+        self.cursor = self.conn.cursor()
+        return self.cursor
 
-def list_tables():
-    c = conn.cursor()
-    c.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    rows = c.fetchall()
-    return "\n".join(row[0] for row in rows if row[0] is not None)
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.cursor.close()
+        self.conn.close()
 
+def list_tables(show=None):
+    with DatabaseConnection() as cursor:
+        cursor.execute("""
+            SELECT table_name 
+            FROM information_schema.tables 
+            WHERE table_schema='public' AND table_type='BASE TABLE';
+        """)
+        rows = cursor.fetchall()
+        return "\n".join(row[0] for row in rows)
 
 def describe_tables(table_names: List[str]):
-    c = conn.cursor()
-    tables = ', '.join("'" + table + "'" for table in table_names)
-    rows = c.execute(
-        f"SELECT sql FROM sqlite_master WHERE type='table' and name IN ({tables});")
-    return '\n'.join(row[0] for row in rows if row[0] is not None)
+    if not table_names:
+        return "No tables provided."
 
+    descriptions = []
+    with DatabaseConnection() as cursor:
+        for table in table_names:
+            cursor.execute("""
+                SELECT column_name, data_type, is_nullable, column_default
+                FROM information_schema.columns
+                WHERE table_schema = 'public' AND table_name = %s;
+            """, (table,))
+            rows = cursor.fetchall()
+            schema = f"Table: {table}\n"
+            for row in rows:
+                column_name, data_type, is_nullable, column_default = row
+                schema += f"  {column_name}: {data_type}, Nullable: {is_nullable}, Default: {column_default}\n"
+            descriptions.append(schema)
+    return "\n\n".join(descriptions)
 
-def run_sqlite_query(query: str):
-    c = conn.cursor()
-    try:
-        c.execute(query)
-        return c.fetchall()
-    except sqlite3.OperationalError as e:
-        return f"Terjadi error saat menjalankan query: {str(e)}"
-
-
-def pandas_sqlite_query(query: str):
-    try:
-        c = conn.cursor()
-        c.execute(query)
-        data = c.fetchall()
-        col_names = [desc[0] for desc in c.description]
-        df = pd.DataFrame(data, columns=col_names)
-        return df
-    except sqlite3.OperationalError as e:
-        return f"Terjadi error saat menjalankan query Pandas: {str(e)}"
+def run_pg_query(query: str):
+    with DatabaseConnection() as cursor:
+        try:
+            cursor.execute(query)
+            try:
+                rows = cursor.fetchall()
+                return rows if rows else "Query executed successfully."
+            except psycopg2.ProgrammingError:
+                # No results to fetch (e.g., INSERT/UPDATE)
+                return "Query executed successfully."
+        except Exception as e:
+            return f"Error running query: {str(e)}"
 
 # === Tool schemas ===
-
+class ListTablesArgsSchema(BaseModel):
+    pass
 
 class RunQueryArgsSchema(BaseModel):
     query: str
@@ -62,8 +80,9 @@ class PandasQueryArgsSchema(BaseModel):
 db_tools = [
     Tool.from_function(
         name="list_tables",
-        description="Gunakan ini untuk menampilkan semua nama tabel di database.",
+        description="Gunakan ini untuk menampilkan semua nama tabel di database. Tidak ada argument di function ini.",
         func=list_tables,
+        args_schema=ListTablesArgsSchema
     ),
     Tool.from_function(
         name="describe_tables",
@@ -72,15 +91,9 @@ db_tools = [
         args_schema=DescribeTablesArgsSchema
     ),
     Tool.from_function(
-        name="run_sqlite_query",
+        name="run_pg_query",
         description="Jalankan query SQL biasa untuk mendapatkan data dari database.",
-        func=run_sqlite_query,
+        func=run_pg_query,
         args_schema=RunQueryArgsSchema
-    ),
-    Tool.from_function(
-        name="pandas_sqlite_query",
-        description="Gunakan ini saat pengguna menyebut Pandas atau meminta data dalam bentuk tabel/visualisasi.",
-        func=pandas_sqlite_query,
-        args_schema=PandasQueryArgsSchema
-    ),
+    )
 ]
