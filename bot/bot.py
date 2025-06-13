@@ -51,8 +51,10 @@ class TelegramBot:
             try:
                 await update.message.reply_text("🔄 Mohon Menunggu, Bapak Kos sedang mencari informasi", parse_mode='Markdown')
                 agent_response = await self.agent.run(update.message.text, user_id)
+                print(agent_response)
                 await update.message.reply_text(agent_response, parse_mode='Markdown')
-            except:
+            except Exception as e:
+                print(e)
                 await update.message.reply_text("❌ Pak Kos bingung, bisa coba lebih spesifik lagi ya", parse_mode='Markdown')
 
     async def button_callback(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -63,9 +65,11 @@ class TelegramBot:
             await query.answer()
             logger.info(f"Callback data: {query.data}")
             if query.data and query.message:
-                await query.message.reply_text("🔄 Mohon Menunggu, Bapak Kos sedang mencari informasi", parse_mode='Markdown') # type: ignore
+                # type: ignore
+                await query.message.reply_text("🔄 Mohon Menunggu, Bapak Kos sedang mencari informasi", parse_mode='Markdown')
                 agent_response = self.agent.run(query.data, user_id)
-                await query.message.reply_text(agent_response, parse_mode='Markdown') # type: ignore
+                # type: ignore
+                await query.message.reply_text(agent_response, parse_mode='Markdown')
 
     async def send_message_to_user(self, user_id: int, message: str, parse_mode: str = "Markdown") -> bool:
         try:
