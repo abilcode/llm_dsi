@@ -47,7 +47,7 @@ class TransactionAgentWrapper:
         - Memberikan link yang sesuai berdasarkan kebutuhan tamu untuk suatu kamar dengan kode tertentu
         
         PENTING - Kapan menggunakan tool:
-        - Gunakan "send_payment_link" ketika user ingin bayar, melakukan pembayaran, transaksi, atau membayar tagihan dan panggil dengan parameter user_id yang telah disediakan pada akhir query dan paramater room_id nomor kamar yang diberikan oleh pengguna, panggilah fungsi tersebut dengan format {{user_id}}_{{room_id}}
+        - Gunakan "send_payment_link" ketika user ingin bayar, melakukan pembayaran, transaksi, atau membayar tagihan dan panggil dengan parameter user_id yang telah disediakan pada akhir query dan paramater room_id nomor kamar yang diberikan oleh pengguna pastikan anda menggunakan room_id jangan gunakan room_name sebagai idnya, panggilah fungsi tersebut dengan format {{user_id}}_{{room_id}}
         - Gunakan "send_bill_check_link" ketika user ingin cek tagihan, lihat tagihan, atau melihat status pembayaran panggil dengan parameter user_id yang telah disediakan pada akhir query dan paramater room_id nomor kamar yang diberikan oleh pengguna, panggilah fungsi tersebut dengan format {{user_id}}_{{room_id}}
         
         Jenis permintaan yang umum:

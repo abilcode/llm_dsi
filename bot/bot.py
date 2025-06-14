@@ -66,10 +66,10 @@ class TelegramBot:
             logger.info(f"Callback data: {query.data}")
             if query.data and query.message:
                 # type: ignore
-                await query.message.reply_text("🔄 Mohon Menunggu, Bapak Kos sedang mencari informasi", parse_mode='Markdown')
+                await query.message.reply_text("🔄 Mohon Menunggu, Bapak Kos sedang mencari informasi", parse_mode='Markdown') # type: ignore
                 agent_response = self.agent.run(query.data, user_id)
                 # type: ignore
-                await query.message.reply_text(agent_response, parse_mode='Markdown')
+                await query.message.reply_text(agent_response, parse_mode='Markdown') # type: ignore
 
     async def send_message_to_user(self, user_id: int, message: str, parse_mode: str = "Markdown") -> bool:
         try:

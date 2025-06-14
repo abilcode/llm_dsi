@@ -5,3 +5,4 @@ Pipfile
 Pipfile.lock
 llm_dsi
 __pycache__
+*.pyc
